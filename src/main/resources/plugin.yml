@@ -6,3 +6,7 @@ prefix: ODA
 authors: [ ImproperIssues, TheTrouper ]
 description: Server utilities for OgreDupe.minehut.gg
 website: https://itzispyder.github.io/
+commands:
+  config:
+    description: Config management
+    usage: /config [get|set] <path> <datatype> <value>
