@@ -12,9 +12,8 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static io.github.itzispyder.ogredupealias.OgreDupeAlias.prefix;
 
 public class ConfigCommand implements TabExecutor {
 
@@ -33,10 +32,16 @@ public class ConfigCommand implements TabExecutor {
                     FileConfiguration config = Config.get();
                     config.set(path,ConfigDataType.parse(value,type));
                     Config.save(config);
-                    sender.sendMessage(Text.builder("&3Config path '&b" + path + "&3' has updated: \n&3Value: &7" + ConfigDataType.parse(value,type)).color().prefix().build());
+                    sender.sendMessage(Text.builder("&3Config path '&b" + path + "&3' has updated: \n&3Value: &7" + ConfigDataType.parse(value,type))
+                            .color()
+                            .prefix()
+                            .build());
                 }
                 case "get" -> {
-                    sender.sendMessage(Text.builder("&3Config path '&b" + path + "&3' has the following data: \n&3Value: &7" + ConfigDataType.parseConfig(path,type)).color().prefix().build());
+                    sender.sendMessage(Text.builder("&3Config path '&b" + path + "&3' has the following data: \n&3Value: &7" + (type.isList() ? Arrays.stream((Object[]) ConfigDataType.parseConfig(path,type)).toList() : ConfigDataType.parseConfig(path,type)))
+                            .color()
+                            .prefix()
+                            .build());
                 }
             }
         }
@@ -72,7 +77,7 @@ public class ConfigCommand implements TabExecutor {
                                     list.add(args[3] + ",");
                                 }
                             }
-                            case "byte[]", "string[]" -> {
+                            case "byte[]", "string[]", "integer[]", "float[]", "double[]" -> {
                                 if (args[3].length() >= 1 && args[3].charAt(args[3].length() - 1) != ',') {
                                     list.add(args[3] + ",");
                                 }

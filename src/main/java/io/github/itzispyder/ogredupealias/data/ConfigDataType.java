@@ -24,6 +24,9 @@ public class ConfigDataType<T> {
     public static final ConfigDataType<Location> LOCATION = register(Location.class);
     public static final ConfigDataType<String[]> STRING_LIST = register(String[].class);
     public static final ConfigDataType<Byte[]> BYTE_LIST = register(Byte[].class);
+    public static final ConfigDataType<Integer[]> INTEGER_LIST = register(Integer[].class);
+    public static final ConfigDataType<Float[]> FLOAT_LIST = register(Float[].class);
+    public static final ConfigDataType<Double[]> DOUBLE_LIST = register(Double[].class);
     public static final ConfigDataType<Null> NULL = register(Null.class);
 
     private static <T> ConfigDataType<T> register(Class<T> type) {
@@ -59,7 +62,12 @@ public class ConfigDataType<T> {
         return name;
     }
 
+    public boolean isList() {
+        return name.contains("[]");
+    }
+
     public static <T> T parseConfig(String path, ConfigDataType<T> type) {
+        if (type.isList()) return (T) Config.get().getList(path).toArray();
         return Config.get().getObject(path,type.getClassType());
     }
 
@@ -83,6 +91,21 @@ public class ConfigDataType<T> {
             case "BYTE[]" -> {
                 List<Byte> list = new ArrayList<>();
                 for (String s : value.split(",")) list.add(Byte.parseByte(s));
+                returnable = list;
+            }
+            case "INTEGER[]" -> {
+                List<Integer> list = new ArrayList<>();
+                for (String s : value.split(",")) list.add(Integer.parseInt(s));
+                returnable = list;
+            }
+            case "FLOAT[]" -> {
+                List<Double> list = new ArrayList<>();
+                for (String s : value.split(",")) list.add(Double.parseDouble(s));
+                returnable = list;
+            }
+            case "DOUBLE[]" -> {
+                List<Float> list = new ArrayList<>();
+                for (String s : value.split(",")) list.add(Float.parseFloat(s));
                 returnable = list;
             }
             case "LOCATION" -> {
