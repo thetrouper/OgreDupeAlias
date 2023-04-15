@@ -1,6 +1,6 @@
 package io.github.itzispyder.ogredupealias.utils;
 
-import static io.github.itzispyder.enderpv.EnderPV.prefix;
+import static io.github.itzispyder.ogredupealias.OgreDupeAlias.prefix;
 
 public class Text {
 
