@@ -1,6 +1,7 @@
 package io.github.itzispyder.ogredupealias;
 
 import io.github.itzispyder.ogredupealias.commands.commands.ConfigCommand;
+import io.github.itzispyder.ogredupealias.data.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +14,6 @@ public final class OgreDupeAlias extends JavaPlugin {
     public static final PluginManager pm = Bukkit.getPluginManager();
     public static final BukkitScheduler sch = Bukkit.getScheduler();
     public static final Logger log = Bukkit.getLogger();
-    public static final String prefix = "";
     public static OgreDupeAlias instance;
 
     @Override
@@ -40,5 +40,9 @@ public final class OgreDupeAlias extends JavaPlugin {
     public void initConfig() {
         this.getConfig().options().copyDefaults();
         this.saveDefaultConfig();
+    }
+
+    public static String prefix() {
+        return Config.Plugin.prefix();
     }
 }

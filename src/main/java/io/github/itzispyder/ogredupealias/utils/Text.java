@@ -32,7 +32,7 @@ public class Text {
     }
 
     public static String prefixed(String s) {
-        return prefix + s;
+        return prefix() + s;
     }
 
     public static TextBuilder builder(String s) {

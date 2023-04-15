@@ -1,6 +1,8 @@
 package io.github.itzispyder.ogredupealias.data;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,8 +22,9 @@ public class ConfigDataType<T> {
     public static final ConfigDataType<Short> SHORT = register(Short.class);
     public static final ConfigDataType<Byte> BYTE = register(Byte.class);
     public static final ConfigDataType<Location> LOCATION = register(Location.class);
-    public static final ConfigDataType<String[]> STRING_ARRAY = register(String[].class);
-    public static final ConfigDataType<Byte[]> BYTE_ARRAY = register(Byte[].class);
+    public static final ConfigDataType<String[]> STRING_LIST = register(String[].class);
+    public static final ConfigDataType<Byte[]> BYTE_LIST = register(Byte[].class);
+    public static final ConfigDataType<Null> NULL = register(Null.class);
 
     private static <T> ConfigDataType<T> register(Class<T> type) {
         ConfigDataType<T> dataType = new ConfigDataType<>(type);
@@ -72,15 +75,26 @@ public class ConfigDataType<T> {
             case "SHORT" -> returnable = Short.parseShort(value);
             case "LONG" -> returnable = Long.parseLong(value);
             case "BYTE" -> returnable = Byte.parseByte(value);
-            case "STRING_ARRAY" -> {
+            case "STRING[]" -> {
                 List<String> list = new ArrayList<>();
                 for (String s : value.split(",")) list.add(s);
-                returnable = list.toArray(new String[0]);
+                returnable = list;
             }
-            case "BYTE_ARRAY" -> {
+            case "BYTE[]" -> {
                 List<Byte> list = new ArrayList<>();
                 for (String s : value.split(",")) list.add(Byte.parseByte(s));
-                returnable = list.toArray(new Byte[0]);
+                returnable = list;
+            }
+            case "LOCATION" -> {
+                String[] parts = value.split(",");
+                World world = Bukkit.getWorld(parts[0]);
+                double x = Double.parseDouble(parts[1]);
+                double y = Double.parseDouble(parts[2]);
+                double z = Double.parseDouble(parts[3]);
+                returnable = new Location(world,x,y,z);
+            }
+            case "NULL" -> {
+                returnable = null;
             }
             default -> returnable = new Object();
         }
