@@ -1,6 +1,8 @@
 package io.github.itzispyder.ogredupealias.data;
 
+import io.github.itzispyder.ogredupealias.OgreDupeAlias;
 import io.github.itzispyder.ogredupealias.utils.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -90,6 +92,9 @@ public abstract class Config {
 
     public static class Player {
         private static final String path = "player.";
+        public static String firstJoinMessage() {
+            return Text.color(get().getString(path + "first-join-message","&e%player% has joined the game for their first time!"));
+        }
         public static String joinMessage() {
             return Text.color(get().getString(path + "join-message","&e%player% has joined the game"));
         }

@@ -6,7 +6,53 @@ prefix: ODA
 authors: [ ImproperIssues, TheTrouper ]
 description: Server utilities for OgreDupe.minehut.gg
 website: https://itzispyder.github.io/
+
+permissions:
+  oda.commands.config:
+    description: Able to manage config from in game
+    default: op
+  oda.commands.mutechat:
+    description: Able to mute chat
+    default: op
+  oda.commands.staffchat:
+    description: Access to staffchat.
+    default: op
+  oda.chat.bypass:
+    description: Bypass chat restrictions
+    default: op
+    children:
+      - oda.chat.bypass.swear
+      - oda.chat.bypass.spam
+      - oda.chat.bypass.repeat
+      - oda.chat.bypass.unicode
+  oda.chat.bypass.swear:
+    description: Bypass anti-swear
+    default: op
+  oda.chat.bypass.spam:
+    description: Bypass anti-spam
+    default: op
+  oda.chat.bypass.repeat:
+    description: Bypass anti-repeat
+    default: op
+  oda.chat.bypass.unicode:
+    description: Bypass anti-unicode
+    default: op
+
 commands:
   config:
     description: Config management
     usage: /config [get|set] <path> <datatype> <value>
+    permission: oda.commands.config
+    aliases:
+      - configuration
+  mutechat:
+    description: Mutes the chat
+    usage: /mutechat [true|false]
+    permission: oda.commands.mutechat
+  staffchat:
+    description: Staff chat
+    usage: /staffchat [<message>]
+    permission: oda.commands.staffchat
+    aliases:
+      - sc
+      - schat

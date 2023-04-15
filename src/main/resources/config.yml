@@ -5,9 +5,9 @@ chat:
   anti-swear:
     enabled: true
     whitelist:
-      - d
+      - glass
     blacklist:
-      - d
+      - ass
   anti-spam:
     enabled: true
     cooldown: 5
@@ -17,6 +17,7 @@ chat:
     enabled: true
 
 player:
+  first-join-message: "%player% has joined the game for their first time!"
   join-message: "&e%player% has joined the game"
   quit-message: "&e%player% has left the game"
   on-join:
