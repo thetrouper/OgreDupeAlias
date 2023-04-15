@@ -1,0 +1,8 @@
+name: OgreDupeAlias
+version: '${version}'
+main: io.github.itzispyder.ogredupealias.OgreDupeAlias
+api-version: 1.17
+prefix: ODA
+authors: [ ImproperIssues, TheTrouper ]
+description: Server utilities for OgreDupe.minehut.gg
+website: https://itzispyder.github.io/
