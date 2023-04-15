@@ -18,7 +18,7 @@ public abstract class Config {
 
     public static final File DATA_FOLDER = instance.getDataFolder();
     public static final File CONFIG_FILE = new File(DATA_FOLDER,"config.yml");
-    public static final String path = "config.";
+    public static final String path = "";
 
     public static FileConfiguration get() {
         return YamlConfiguration.loadConfiguration(CONFIG_FILE);
@@ -41,9 +41,70 @@ public abstract class Config {
     }
 
     public static class Plugin {
-        private static final String path = "config.plugin.";
+        private static final String path = "plugin.";
         public static String prefix() {
-            return get().getString(path + "prefix") != null ? get().getString(path + "prefix") : Text.color("&7[&5Ogre&3Dupe&7] &r");
+            return Text.color(get().getString(path + "prefix", "&7[&5Ogre&3Dupe&7] &r"));
+        }
+    }
+
+    public static class Chat {
+        private static final String path = "chat.";
+
+        public static class AntiSwear {
+            private static final String path = Chat.path + "anti-swear.";
+            public static boolean enabled() {
+                return get().getBoolean(path + "enabled", false);
+            }
+            public static List<String> whitelist() {
+                return get().getStringList(path + "whitelist");
+            }
+            public static List<String> blacklist() {
+                return get().getStringList(path + "blacklist");
+            }
+        }
+
+        public static class AntiSpam {
+            private static final String path = Chat.path + "anti-spam.";
+            public static boolean enabled() {
+                return get().getBoolean(path + "enabled", false);
+            }
+            public static double cooldown() {
+                return get().getDouble(path + "cooldown", 0.0);
+            }
+        }
+
+        public static class AntiRepeat {
+            private static final String path = Chat.path + "anti-repeat.";
+            public static boolean enabled() {
+                return get().getBoolean(path + "enabled", false);
+            }
+        }
+
+        public static class AntiUnicode {
+            private static final String path = Chat.path + "anti-unicode.";
+            public static boolean enabled() {
+                return get().getBoolean(path + "enabled", false);
+            }
+        }
+    }
+
+    public static class Player {
+        private static final String path = "player.";
+        public static String joinMessage() {
+            return Text.color(get().getString(path + "join-message","&e%player% has joined the game"));
+        }
+        public static String quitMessage() {
+            return Text.color(get().getString(path + "quit-message","&e%player% has left the game"));
+        }
+        public static List<String> onJoin() {
+            return get().getStringList(path + "on-join");
+        }
+    }
+
+    public static class Server {
+        private static final String path = "server.";
+        public static List<String> commandSpyBlacklist() {
+            return get().getStringList(path + "command-spy-blacklist");
         }
     }
 }
