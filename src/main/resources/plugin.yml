@@ -23,6 +23,9 @@ permissions:
   oda.commands.commandspy:
     description: Access to commandspy.
     default: op
+  oda.commands.recipespy:
+    description: Access to recipespy.
+    default: op
   oda.commands.irepair:
     description: Access to irepair.
     default: op
@@ -78,6 +81,12 @@ commands:
     aliases:
       - cspy
       - cmdspy
+  recipespy:
+    description: Read what recipes you are crafting
+    usage: /recipespy
+    permission: oda.commands.recipespy
+    aliases:
+      - rspy
   irepair:
     description: Repairs and restocks your inventory!
     usage: /irepair

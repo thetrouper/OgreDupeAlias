@@ -1,5 +1,8 @@
 package io.github.itzispyder.ogredupealias.plugin.custom.forging;
 
+import io.github.itzispyder.ogredupealias.plugin.RecipientList;
+import io.github.itzispyder.ogredupealias.utils.ServerUtils;
+import io.github.itzispyder.ogredupealias.utils.Text;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -8,11 +11,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class CustomTable {
 
+    public static final RecipientList recipeSpies = new RecipientList();
     private final Inventory inv;
 
     public CustomTable(Inventory inv) {
@@ -23,16 +28,27 @@ public class CustomTable {
         getGrid().stream().filter(Objects::nonNull).forEach(item -> item.setAmount(item.getAmount() - 1));
     }
 
-    public List<ItemStack> getGrid() {
+    public List<ItemStack> getGrid(boolean shapeless) {
         List<ItemStack> list = new ArrayList<>();
         for (int x = 0; x < 3; x++) {
             for (int i = 1; i < 4; i++) list.add(inv.getItem(i + (x * 9)));
         }
+        if (shapeless) {
+            return list.stream().filter(Objects::nonNull).sorted(Comparator.comparing(ItemStack::getTranslationKey)).toList();
+        }
         return list;
     }
 
+    public List<ItemStack> getGrid() {
+        return getGrid(false);
+    }
+
     public CraftingKey getGridKey() {
-        return new CraftingKey(getGrid());
+        return getGridKey(false);
+    }
+
+    public CraftingKey getGridKey(boolean shapeless) {
+        return new CraftingKey(getGrid(shapeless));
     }
 
     public ItemStack getResult() {
@@ -48,10 +64,10 @@ public class CustomTable {
     }
 
     public boolean attemptCraft() {
-        if (CraftingKey.getResult(this.getGridKey()).getType().isAir()) return false;
+        if (CraftingKeys.getResult(this.getGridKey()).getType().isAir()) return false;
         ItemStack resultSlotItem = inv.getItem(this.getResultSlot());
         if (resultSlotItem != null && !resultSlotItem.getType().isAir()) return false;
-        ItemStack result = CraftingKey.getResult(this.getGridKey());
+        ItemStack result = CraftingKeys.getResult(this.getGridKey());
         this.clearGrid();
         inv.setItem(this.getResultSlot(),result);
         return true;
@@ -82,6 +98,11 @@ public class CustomTable {
 
         if (slot == table.getCraftingSlot()) {
             e.setCancelled(true);
+            ServerUtils.dmEachPlayer(recipeSpies::isRecipient, Text.builder(
+                    "\n&b&lSHAPED: &3" + table.getGridKey(false)
+                    + "\n&b&lSHAPELESS: &3" + table.getGridKey(true)
+                    + "\n "
+            ).prefix().color().build());
             if (table.attemptCraft()) p.playSound(p.getLocation(), Sound.BLOCK_SMITHING_TABLE_USE,1,1);
             else p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK,1,1);
         }

@@ -3,6 +3,7 @@ package io.github.itzispyder.ogredupealias;
 import io.github.itzispyder.ogredupealias.commands.commands.*;
 import io.github.itzispyder.ogredupealias.data.Config;
 import io.github.itzispyder.ogredupealias.events.*;
+import io.github.itzispyder.ogredupealias.plugin.custom.forging.CraftingKeys;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         instance = this;
         this.init();
         this.initConfig();
+        CraftingKeys.initRecipes();
     }
 
     @Override
@@ -51,6 +53,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("socialspy").setTabCompleter(new SocialSpyCommand());
         getCommand("commandspy").setExecutor(new CommandSpyCommand());
         getCommand("commandspy").setTabCompleter(new CommandSpyCommand());
+        getCommand("recipespy").setExecutor(new RecipeSpyCommand());
+        getCommand("recipespy").setTabCompleter(new RecipeSpyCommand());
         getCommand("irepair").setExecutor(new IRepairCommand());
         getCommand("irepair").setTabCompleter(new IRepairCommand());
     }
