@@ -78,15 +78,15 @@ public class ChatConstraints {
 
         TextComponent text = new TextComponent();
         text.setText(Text.builder(
-                        "&cPlease do not send unsupported characters in chat!"
-                                + "\n&cMessage: &f" + message
-                                + "\n&cCaught: &e" + nonAllowed
-                ).prefix()
-                .color()
-                .build());
+            "&cPlease do not send unsupported characters in chat!"
+            + "\n&cMessage: &f" + message
+            + "\n&cCaught: &e" + nonAllowed
+        ).prefix()
+        .color()
+        .build());
         text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color(
-                "&cMessage: &f" + message
-                        + "\n&cCaught: &e" + nonAllowed
+            "&cMessage: &f" + message
+            + "\n&cCaught: &e" + nonAllowed
         ))));
         player.spigot().sendMessage(text);
         ServerUtils.forEachStaff(p -> {
@@ -119,15 +119,15 @@ public class ChatConstraints {
         String warn = ArrayUtils.list2string(caught);
         TextComponent text = new TextComponent();
         text.setText(Text.builder(
-                        "&cPlease do not swear in chat!"
-                                + "\n&cMessage: &f" + d
-                                + "\n&cCaught: &e" + warn
-                ).prefix()
-                .color()
-                .build());
+            "&cPlease do not swear in chat!"
+            + "\n&cMessage: &f" + d
+            + "\n&cCaught: &e" + warn
+        ).prefix()
+        .color()
+        .build());
         text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color(
-                "&cMessage: &f" + d
-                        + "\n&cCaught: &e" + warn
+            "&cMessage: &f" + d
+            + "\n&cCaught: &e" + warn
         ))));
         player.spigot().sendMessage(text);
         ServerUtils.forEachStaff(p -> {
