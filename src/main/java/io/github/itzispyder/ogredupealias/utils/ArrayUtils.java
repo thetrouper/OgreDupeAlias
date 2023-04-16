@@ -1,5 +1,8 @@
 package io.github.itzispyder.ogredupealias.utils;
 
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,5 +32,10 @@ public abstract class ArrayUtils {
         List<T> list = Arrays.asList(ts);
         tList.forEach(list::add);
         return list;
+    }
+
+    public static class Constants {
+        public static final List<String> MATERIAL_NAMES = toNewList(Arrays.stream(Material.values()).toList(),m -> m.name().toLowerCase());
+        public static final List<String> ENTITY_NAMES = toNewList(Arrays.stream(EntityType.values()).toList(),e -> e.name().toLowerCase());
     }
 }
