@@ -2,7 +2,7 @@ package io.github.itzispyder.ogredupealias.commands.commands;
 
 import io.github.itzispyder.ogredupealias.commands.CmdExHandler;
 import io.github.itzispyder.ogredupealias.commands.TabComplBuilder;
-import io.github.itzispyder.ogredupealias.utils.ChatConstraints;
+import io.github.itzispyder.ogredupealias.plugin.ChatConstraints;
 import io.github.itzispyder.ogredupealias.utils.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

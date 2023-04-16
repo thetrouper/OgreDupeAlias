@@ -17,6 +17,15 @@ permissions:
   oda.commands.staffchat:
     description: Access to staffchat.
     default: op
+  oda.commands.socialspy:
+    description: Access to socialspy.
+    default: op
+  oda.commands.commandspy:
+    description: Access to commandspy.
+    default: op
+  oda.commands.irepair:
+    description: Access to irepair.
+    default: op
   oda.chat.bypass:
     description: Bypass chat restrictions
     default: op
@@ -56,3 +65,22 @@ commands:
     aliases:
       - sc
       - schat
+  socialspy:
+    description: Spy on private messages
+    usage: /socialspy
+    permission: oda.commands.socialspy
+    aliases:
+      - sspy
+  commandspy:
+    description: Spy on player commands
+    usage: /commandspy
+    permission: oda.commands.commandspy
+    aliases:
+      - cspy
+      - cmdspy
+  irepair:
+    description: Repairs and restocks your inventory!
+    usage: /irepair
+    permission: oda.commands.irepair
+    aliases:
+      - ipearlrepair

@@ -1,25 +1,31 @@
 package io.github.itzispyder.ogredupealias.commands.commands;
 
 import io.github.itzispyder.ogredupealias.commands.CmdExHandler;
-import io.github.itzispyder.ogredupealias.commands.TabComplBuilder;
-import io.github.itzispyder.ogredupealias.utils.ServerUtils;
+import io.github.itzispyder.ogredupealias.events.CommandEventListener;
 import io.github.itzispyder.ogredupealias.utils.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StaffChatCommand implements TabExecutor {
+public class CommandSpyCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
-            String msg = String.join(" ", args);
-            ServerUtils.dmEachPlayer(p -> p.hasPermission("oda.commands.staffchat"), Text.builder()
-                    .message("&7[&bStaffChat&7] &3" + sender.getName() + " &8>> &e" + msg)
-                    .color()
+            Player p = (Player) sender;
+            boolean isRecipient = CommandEventListener.commandSpies.isRecipient(p);
+            if (isRecipient) CommandEventListener.commandSpies.removeRecipient(p);
+            else CommandEventListener.commandSpies.addRecipient(p);
+            isRecipient = CommandEventListener.commandSpies.isRecipient(p);
+
+            sender.sendMessage(Text.builder()
+                    .message("&7[&bCommandSpy&7] &8>> &3You are " + (isRecipient ? "&anow" : "&cno longer") + " &3a recipient!")
                     .prefix()
+                    .color()
                     .build());
         }
         catch (Exception ex) {
@@ -31,10 +37,6 @@ public class StaffChatCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return new TabComplBuilder(sender, command, alias, args)
-                .add(1, new String[]{
-                        "[<message>]"
-                },args[0].length() == 0)
-                .build();
+        return new ArrayList<>();
     }
 }

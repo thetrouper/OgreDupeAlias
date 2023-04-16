@@ -26,3 +26,8 @@ player:
 server:
   command-spy-blacklist:
     - /dupe
+    - /msg
+    - /message
+    - /w
+    - /whisper
+    - /tell

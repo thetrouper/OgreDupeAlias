@@ -1,10 +1,9 @@
 package io.github.itzispyder.ogredupealias;
 
-import io.github.itzispyder.ogredupealias.commands.commands.ConfigCommand;
-import io.github.itzispyder.ogredupealias.commands.commands.MuteChatCommand;
-import io.github.itzispyder.ogredupealias.commands.commands.StaffChatCommand;
+import io.github.itzispyder.ogredupealias.commands.commands.*;
 import io.github.itzispyder.ogredupealias.data.Config;
 import io.github.itzispyder.ogredupealias.events.ChatEventListener;
+import io.github.itzispyder.ogredupealias.events.CommandEventListener;
 import io.github.itzispyder.ogredupealias.events.PlayerEventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -37,6 +36,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         // Events
         pm.registerEvents(new ChatEventListener(),this);
         pm.registerEvents(new PlayerEventListener(),this);
+        pm.registerEvents(new CommandEventListener(),this);
 
         // Commands
         getCommand("config").setExecutor(new ConfigCommand());
@@ -45,6 +45,12 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("mutechat").setTabCompleter(new MuteChatCommand());
         getCommand("staffchat").setExecutor(new StaffChatCommand());
         getCommand("staffchat").setTabCompleter(new StaffChatCommand());
+        getCommand("socialspy").setExecutor(new SocialSpyCommand());
+        getCommand("socialspy").setTabCompleter(new SocialSpyCommand());
+        getCommand("commandspy").setExecutor(new CommandSpyCommand());
+        getCommand("commandspy").setTabCompleter(new CommandSpyCommand());
+        getCommand("irepair").setExecutor(new IRepairCommand());
+        getCommand("irepair").setTabCompleter(new IRepairCommand());
     }
 
     public void initConfig() {

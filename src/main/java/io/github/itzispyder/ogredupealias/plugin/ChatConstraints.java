@@ -1,6 +1,9 @@
-package io.github.itzispyder.ogredupealias.utils;
+package io.github.itzispyder.ogredupealias.plugin;
 
 import io.github.itzispyder.ogredupealias.data.Config;
+import io.github.itzispyder.ogredupealias.utils.ArrayUtils;
+import io.github.itzispyder.ogredupealias.utils.ServerUtils;
+import io.github.itzispyder.ogredupealias.utils.Text;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;

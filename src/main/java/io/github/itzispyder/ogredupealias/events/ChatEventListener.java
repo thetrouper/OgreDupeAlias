@@ -1,6 +1,6 @@
 package io.github.itzispyder.ogredupealias.events;
 
-import io.github.itzispyder.ogredupealias.utils.ChatConstraints;
+import io.github.itzispyder.ogredupealias.plugin.ChatConstraints;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
