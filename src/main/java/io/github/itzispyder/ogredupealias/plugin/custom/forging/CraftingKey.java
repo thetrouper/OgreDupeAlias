@@ -1,4 +1,4 @@
-package io.github.itzispyder.ogredupealias.plugin.custom;
+package io.github.itzispyder.ogredupealias.plugin.custom.forging;
 
 import io.github.itzispyder.ogredupealias.utils.ArrayUtils;
 import org.bukkit.Material;
@@ -17,13 +17,21 @@ public class CraftingKey {
         REGISTERED_KEYS.put(key.getKey(),result);
     }
 
+    public static void register(String key, ItemStack result) {
+        REGISTERED_KEYS.put(key,result);
+    }
+
     public static ItemStack getResult(CraftingKey key) {
         ItemStack result = REGISTERED_KEYS.get(key.getKey());
         return result != null ? result : new ItemStack(Material.AIR);
     }
 
     public CraftingKey(Iterable<ItemStack> input) {
-        this.key = String.join("-", ArrayUtils.toNewList(input,item -> item.getType().name().toLowerCase() + ":" + item.getItemMeta().getAsString()));
+        this.key = String.join("-", ArrayUtils.toNewList(input,this::keyOfStack));
+    }
+
+    private String keyOfStack(ItemStack item) {
+        return item != null && item.getItemMeta() != null ? item.getType().name().toLowerCase() + ":" + item.getItemMeta().getAsString() : "air:{}";
     }
 
     public CraftingKey(ItemStack[] input) {
