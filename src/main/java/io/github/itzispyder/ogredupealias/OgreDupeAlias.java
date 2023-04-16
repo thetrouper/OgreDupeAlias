@@ -2,9 +2,7 @@ package io.github.itzispyder.ogredupealias;
 
 import io.github.itzispyder.ogredupealias.commands.commands.*;
 import io.github.itzispyder.ogredupealias.data.Config;
-import io.github.itzispyder.ogredupealias.events.ChatEventListener;
-import io.github.itzispyder.ogredupealias.events.CommandEventListener;
-import io.github.itzispyder.ogredupealias.events.PlayerEventListener;
+import io.github.itzispyder.ogredupealias.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,6 +35,10 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new ChatEventListener(),this);
         pm.registerEvents(new PlayerEventListener(),this);
         pm.registerEvents(new CommandEventListener(),this);
+        pm.registerEvents(new BlockActionListener(),this);
+        pm.registerEvents(new EntityDeathListener(),this);
+        pm.registerEvents(new InteractionListener(),this);
+        pm.registerEvents(new InventoryActionListener(),this);
 
         // Commands
         getCommand("config").setExecutor(new ConfigCommand());

@@ -1,4 +1,4 @@
-package io.github.itzispyder.ogredupealias.data;
+package io.github.itzispyder.ogredupealias.data.builder;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 public class ItemBuilder {
 
-    private final ItemStack stack;
-    private final ItemMeta meta;
+    private ItemStack stack;
+    private ItemMeta meta;
 
     public ItemBuilder() {
         this(new ItemStack(Material.STONE));
@@ -78,8 +78,26 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder runTaskItem(Function<ItemStack, ItemStack> task) {
+        this.stack = task.apply(build());
+        return this;
+    }
+
+    public ItemBuilder runTaskMeta(Function<ItemMeta, ItemMeta> task) {
+        this.meta = task.apply(meta);
+        return this;
+    }
+
     public ItemStack build() {
         stack.setItemMeta(meta);
         return stack;
+    }
+
+    public static ItemBuilder create() {
+        return new ItemBuilder();
+    }
+
+    public static ItemBuilder create(ItemStack item) {
+        return new ItemBuilder(item);
     }
 }
