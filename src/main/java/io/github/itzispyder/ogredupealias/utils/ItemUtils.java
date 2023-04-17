@@ -10,6 +10,13 @@ import java.util.UUID;
 
 public abstract class ItemUtils {
 
+    public static String nbtOf(ItemStack item) {
+        if (item == null || item.getType().isAir()) return "air{}";
+        String name = item.getType().name().toLowerCase();
+        if (!item.hasItemMeta() || item.getItemMeta() == null) return name + "{}";
+        return name + item.getItemMeta().getAsString();
+    }
+
     public static boolean isSkullOf(ItemStack item, String name) {
         if (item == null || item.getType().isAir()) return false;
         if (item.getType() != Material.PLAYER_HEAD) return false;

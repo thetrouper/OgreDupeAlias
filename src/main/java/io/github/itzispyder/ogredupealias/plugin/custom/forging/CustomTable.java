@@ -64,10 +64,15 @@ public class CustomTable {
     }
 
     public boolean attemptCraft() {
-        if (CraftingKeys.getResult(this.getGridKey()).getType().isAir()) return false;
         ItemStack resultSlotItem = inv.getItem(this.getResultSlot());
         if (resultSlotItem != null && !resultSlotItem.getType().isAir()) return false;
-        ItemStack result = CraftingKeys.getResult(this.getGridKey());
+
+        ItemStack result = CraftingKeys.getResult(this.getGridKey(false));
+        if (result.getType().isAir()) {
+            result = CraftingKeys.getResult(this.getGridKey(true));
+            if (result.getType().isAir()) return false;
+        }
+
         this.clearGrid();
         inv.setItem(this.getResultSlot(),result);
         return true;
@@ -113,7 +118,9 @@ public class CustomTable {
         final Player p = (Player) e.getPlayer();
         final CustomTable table = new CustomTable(inv);
 
-        table.getGrid().stream().filter(Objects::nonNull).forEach(item -> {
+        List<ItemStack> items = table.getGrid();
+        items.add(table.getResult());
+        items.stream().filter(Objects::nonNull).forEach(item -> {
             p.getWorld().dropItem(p.getLocation(),item);
         });
     }

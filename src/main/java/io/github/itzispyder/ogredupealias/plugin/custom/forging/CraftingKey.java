@@ -1,6 +1,7 @@
 package io.github.itzispyder.ogredupealias.plugin.custom.forging;
 
 import io.github.itzispyder.ogredupealias.utils.ArrayUtils;
+import io.github.itzispyder.ogredupealias.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -11,11 +12,7 @@ public class CraftingKey {
     public final String key;
 
     public CraftingKey(Iterable<ItemStack> input) {
-        this.key = String.join("-", ArrayUtils.toNewList(input,this::keyOfStack));
-    }
-
-    private String keyOfStack(ItemStack item) {
-        return item != null && item.getItemMeta() != null ? item.getType().name().toLowerCase() + ":" + item.getItemMeta().getAsString() : "air:{}";
+        this.key = "[" + String.join(", ", ArrayUtils.toNewList(input, ItemUtils::nbtOf)) + "]";
     }
 
     public CraftingKey(ItemStack[] input) {
