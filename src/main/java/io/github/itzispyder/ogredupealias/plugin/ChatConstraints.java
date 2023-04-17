@@ -30,11 +30,7 @@ public class ChatConstraints {
     public boolean passChatMuted() {
         if (!isChatMuted) return true;
         if (player.hasPermission("oda.chat.bypass")) return true;
-        player.sendMessage(Text.builder()
-                .message("&cChat is currently muted! Please contact an administrator if you believe this is a mistake!")
-                .prefix()
-                .color()
-                .build());
+        player.sendMessage(Text.builder().message("&cChat is currently muted! Please contact an administrator if you believe this is a mistake!").prefix().color().build());
         return false;
     }
 
@@ -43,10 +39,7 @@ public class ChatConstraints {
         if (player.hasPermission("oda.chat.bypass.repeat")) return true;
 
         if (lastMessage.containsKey(player.getName()) && isSimilar(message, lastMessage.get(player.getName()))) {
-            player.sendMessage(Text.builder("&cPlease do not repeat similar messages!")
-                    .prefix()
-                    .color()
-                    .build());
+            player.sendMessage(Text.builder("&cPlease do not repeat similar messages!").prefix().color().build());
             return false;
         }
         lastMessage.put(player.getName(), message);
@@ -58,10 +51,7 @@ public class ChatConstraints {
         if (player.hasPermission("oda.chat.bypass.spam")) return true;
 
         if (chatCooldown.containsKey(player.getName()) && chatCooldown.get(player.getName()) > System.currentTimeMillis()) {
-            player.sendMessage(Text.builder("&cYou can chat again in &e" + getChatCooldown(player) + "&c seconds!")
-                    .prefix()
-                    .color()
-                    .build());
+            player.sendMessage(Text.builder("&cYou can chat again in &e" + getChatCooldown(player) + "&c seconds!").prefix().color().build());
             return false;
         }
         int cooldownMillis = (int) (Config.Chat.AntiSpam.cooldown() * 1000);
@@ -77,17 +67,8 @@ public class ChatConstraints {
         if (nonAllowed.length() == 0) return true;
 
         TextComponent text = new TextComponent();
-        text.setText(Text.builder(
-            "&cPlease do not send unsupported characters in chat!"
-            + "\n&cMessage: &f" + message
-            + "\n&cCaught: &e" + nonAllowed
-        ).prefix()
-        .color()
-        .build());
-        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color(
-            "&cMessage: &f" + message
-            + "\n&cCaught: &e" + nonAllowed
-        ))));
+        text.setText(Text.builder("&cPlease do not send unsupported characters in chat!" + "\n&cMessage: &f" + message + "\n&cCaught: &e" + nonAllowed).prefix().color().build());
+        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color("&cMessage: &f" + message + "\n&cCaught: &e" + nonAllowed))));
         player.spigot().sendMessage(text);
         ServerUtils.forEachStaff(p -> {
             p.spigot().sendMessage(text);
@@ -118,19 +99,13 @@ public class ChatConstraints {
 
         String warn = ArrayUtils.list2string(caught);
         TextComponent text = new TextComponent();
-        text.setText(Text.builder(
-            "&cPlease do not swear in chat!"
-            + "\n&cMessage: &f" + d
-            + "\n&cCaught: &e" + warn
-        ).prefix()
-        .color()
-        .build());
-        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color(
-            "&cMessage: &f" + d
-            + "\n&cCaught: &e" + warn
-        ))));
+        text.setText(Text.builder("\n&cMessage: &f" + d + "\n&cCaught: &e" + warn).prefix().color().build());
+        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color("&cMessage: &f" + d + "\n&cCaught: &e" + warn))));
+
+        player.sendMessage(Text.builder("&cPlease do not swear in chat!").color().prefix().build());
         player.spigot().sendMessage(text);
         ServerUtils.forEachStaff(p -> {
+            p.sendMessage(Text.builder("&b" + player.getName() + " &3has triggered the &bAntiSwear&3:").prefix().color().build());
             p.spigot().sendMessage(text);
         });
         return false;
