@@ -17,6 +17,10 @@ public abstract class ItemUtils {
         return name + item.getItemMeta().getAsString();
     }
 
+    public static boolean nbtMatches(ItemStack item1, ItemStack item2) {
+        return nbtOf(item1).equals(nbtOf(item2));
+    }
+
     public static boolean isSkullOf(ItemStack item, String name) {
         if (item == null || item.getType().isAir()) return false;
         if (item.getType() != Material.PLAYER_HEAD) return false;
