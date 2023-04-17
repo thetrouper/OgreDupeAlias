@@ -70,9 +70,6 @@ public class ChatConstraints {
         text.setText(Text.builder("&cPlease do not send unsupported characters in chat!" + "\n&cMessage: &f" + message + "\n&cCaught: &e" + nonAllowed).prefix().color().build());
         text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color("&cMessage: &f" + message + "\n&cCaught: &e" + nonAllowed))));
         player.spigot().sendMessage(text);
-        ServerUtils.forEachStaff(p -> {
-            p.spigot().sendMessage(text);
-        });
         return false;
     }
 
@@ -104,9 +101,9 @@ public class ChatConstraints {
 
         player.sendMessage(Text.builder("&cPlease do not swear in chat!").color().prefix().build());
         player.spigot().sendMessage(text);
-        ServerUtils.forEachStaff(p -> {
-            p.sendMessage(Text.builder("&b" + player.getName() + " &3has triggered the &bAntiSwear&3:").prefix().color().build());
-            p.spigot().sendMessage(text);
+        ServerUtils.forEachStaff(staff -> {
+            staff.sendMessage(Text.builder("&b" + player.getName() + " &3has triggered the &bAntiSwear&3:").prefix().color().build());
+            staff.spigot().sendMessage(text);
         });
         return false;
     }
