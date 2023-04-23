@@ -32,6 +32,7 @@ public abstract class ShulkerUtils {
         final ItemStack item = e.getItem();
         final Action a = e.getAction();
 
+        if (!e.isCancelled() && a == Action.RIGHT_CLICK_BLOCK) return;
         if (item == null || item.getType().isAir()) return;
         if (a != Action.RIGHT_CLICK_BLOCK && a != Action.RIGHT_CLICK_AIR) return;
         if (!item.getType().name().contains("SHULKER_BOX")) return;
@@ -48,6 +49,7 @@ public abstract class ShulkerUtils {
         final Player p = (Player) e.getWhoClicked();
 
         final ItemStack item = lastOpenedBox.get(p.getUniqueId());
+        if (item == null || !item.getType().name().contains("SHULKER_BOX")) return;
         final BlockStateMeta meta = (BlockStateMeta) item.getItemMeta();
         final ShulkerBox box = (ShulkerBox) meta.getBlockState();
 
@@ -62,6 +64,7 @@ public abstract class ShulkerUtils {
         final Player p = (Player) e.getPlayer();
 
         final ItemStack item = lastOpenedBox.get(p.getUniqueId());
+        if (item == null || !item.getType().name().contains("SHULKER_BOX")) return;
         final BlockStateMeta meta = (BlockStateMeta) item.getItemMeta();
         final ShulkerBox box = (ShulkerBox) meta.getBlockState();
 

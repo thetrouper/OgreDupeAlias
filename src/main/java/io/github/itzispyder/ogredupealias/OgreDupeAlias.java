@@ -57,6 +57,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("recipespy").setTabCompleter(new RecipeSpyCommand());
         getCommand("irepair").setExecutor(new IRepairCommand());
         getCommand("irepair").setTabCompleter(new IRepairCommand());
+        getCommand("message").setExecutor(new MessageCommand());
+        getCommand("message").setTabCompleter(new MessageCommand());
     }
 
     public void initConfig() {

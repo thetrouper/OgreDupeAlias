@@ -22,14 +22,14 @@ public class InteractionListener implements Listener {
             final Block b = e.getClickedBlock();
             final ItemStack item = e.getItem();
 
+            if (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK) {
+                ShulkerUtils.onShulkerInteraction(e);
+            }
+
             if (PlacedStructures.isCustomTable(b)) {
                 e.setCancelled(true);
                 p.openInventory(InventoryPresets.createCustomTable());
                 return;
-            }
-
-            if (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK) {
-                ShulkerUtils.onShulkerInteraction(e);
             }
         }
         catch (Exception ignore) {}

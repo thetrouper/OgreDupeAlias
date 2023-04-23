@@ -94,3 +94,14 @@ commands:
     aliases:
       - ipearlrepair
       - irestock
+  message:
+    description: Private message a player
+    usage: /message <player> [<message>]
+    aliases:
+      - msg
+      - pm
+      - dm
+      - tell
+      - whisper
+      - w
+      - message

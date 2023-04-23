@@ -25,7 +25,9 @@ public class CommandEventListener implements Listener {
             "/whisper",
             "/w",
             "/message",
-            "/msg"
+            "/msg",
+            "/dm",
+            "/pm"
     );
 
     @EventHandler
