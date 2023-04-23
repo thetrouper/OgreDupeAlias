@@ -21,7 +21,7 @@ public abstract class ShulkerUtils {
 
     public static Inventory getOf(ItemStack item, ShulkerBox box) {
         final String display = ItemUtils.getDisplay(item);
-        final Inventory inv = Bukkit.createInventory(null, box.getInventory().getSize(), Text.color("&7Viewing " + display));
+        final Inventory inv = Bukkit.createInventory(null, box.getInventory().getSize(), Text.color("&7Viewing&r " + display));
 
         inv.setContents(box.getInventory().getContents());
         return inv;
