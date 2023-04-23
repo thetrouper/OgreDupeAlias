@@ -2,6 +2,7 @@ package io.github.itzispyder.ogredupealias.events;
 
 import io.github.itzispyder.ogredupealias.data.PlacedStructures;
 import io.github.itzispyder.ogredupealias.plugin.InventoryPresets;
+import io.github.itzispyder.ogredupealias.utils.ShulkerUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,7 @@ public class InteractionListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         final Player p = e.getPlayer();
-        final Action action = e.getAction();
+        final Action a = e.getAction();
 
         try {
             final Block b = e.getClickedBlock();
@@ -25,6 +26,10 @@ public class InteractionListener implements Listener {
                 e.setCancelled(true);
                 p.openInventory(InventoryPresets.createCustomTable());
                 return;
+            }
+
+            if (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK) {
+                ShulkerUtils.onShulkerInteraction(e);
             }
         }
         catch (Exception ignore) {}
