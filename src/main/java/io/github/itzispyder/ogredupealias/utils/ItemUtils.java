@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
@@ -41,5 +42,12 @@ public abstract class ItemUtils {
     public static ItemStack skullOf(UUID owner) {
         OfflinePlayer p = Bukkit.getOfflinePlayer(owner);
         return skullOf(p.getName());
+    }
+
+    public static String getDisplay(ItemStack item) {
+        String def = StringUtils.capitalizeWords(item.getType().name());
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return def;
+        return meta.hasDisplayName() ? meta.getDisplayName() : def;
     }
 }

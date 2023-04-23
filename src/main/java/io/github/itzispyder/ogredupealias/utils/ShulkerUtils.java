@@ -19,8 +19,8 @@ public abstract class ShulkerUtils {
 
     private static final Map<UUID,ItemStack> lastOpenedBox = new HashMap<>();
 
-    public static Inventory getOf(ShulkerBox box) {
-        final String display = box.getCustomName();
+    public static Inventory getOf(ItemStack item, ShulkerBox box) {
+        final String display = ItemUtils.getDisplay(item);
         final Inventory inv = Bukkit.createInventory(null, box.getInventory().getSize(), Text.color("&7Viewing " + display));
 
         inv.setContents(box.getInventory().getContents());
@@ -40,7 +40,7 @@ public abstract class ShulkerUtils {
         final BlockStateMeta meta = (BlockStateMeta) item.getItemMeta();
         final ShulkerBox box = (ShulkerBox) meta.getBlockState();
 
-        p.openInventory(getOf(box));
+        p.openInventory(getOf(item, box));
         lastOpenedBox.put(p.getUniqueId(),item);
     }
 
