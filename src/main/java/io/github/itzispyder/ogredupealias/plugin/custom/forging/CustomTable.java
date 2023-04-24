@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -95,6 +96,9 @@ public class CustomTable {
         final Player p = (Player) e.getWhoClicked();
         final int slot = e.getSlot();
         final CustomTable table = new CustomTable(inv);
+
+        if (inv == null) return;
+        if (inv.getType() == InventoryType.PLAYER) return;
 
         if (table.isUnresponsiveSlot(slot)) {
             e.setCancelled(true);

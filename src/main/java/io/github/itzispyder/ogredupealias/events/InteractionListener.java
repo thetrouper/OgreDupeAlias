@@ -2,7 +2,6 @@ package io.github.itzispyder.ogredupealias.events;
 
 import io.github.itzispyder.ogredupealias.data.PlacedStructures;
 import io.github.itzispyder.ogredupealias.plugin.InventoryPresets;
-import io.github.itzispyder.ogredupealias.utils.ShulkerUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,10 +20,6 @@ public class InteractionListener implements Listener {
         try {
             final Block b = e.getClickedBlock();
             final ItemStack item = e.getItem();
-
-            if (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK) {
-                ShulkerUtils.onShulkerInteraction(e);
-            }
 
             if (PlacedStructures.isCustomTable(b)) {
                 e.setCancelled(true);
