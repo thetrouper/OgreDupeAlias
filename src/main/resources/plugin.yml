@@ -111,6 +111,7 @@ commands:
   attackcooldown:
     description: Attack cooldown bypass for entities.
     usage: /attackcooldown
+    permission: oda.commands.attackcooldown
     aliases:
       - atkcool
       - attackcool
