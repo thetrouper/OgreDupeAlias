@@ -41,6 +41,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new EntityDeathListener(),this);
         pm.registerEvents(new InteractionListener(),this);
         pm.registerEvents(new InventoryActionListener(),this);
+        pm.registerEvents(new EntityDamageListener(),this);
 
         // Commands
         getCommand("config").setExecutor(new ConfigCommand());
@@ -59,6 +60,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("irepair").setTabCompleter(new IRepairCommand());
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("message").setTabCompleter(new MessageCommand());
+        getCommand("attackcooldown").setExecutor(new AttackCooldownCommand());
+        getCommand("attackcooldown").setTabCompleter(new AttackCooldownCommand());
     }
 
     public void initConfig() {

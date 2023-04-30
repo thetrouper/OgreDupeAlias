@@ -29,6 +29,9 @@ permissions:
   oda.commands.irepair:
     description: Access to irepair.
     default: op
+  oda.commands.attackcooldown:
+    description: Access to attackcooldown.
+    default: op
   oda.chat.bypass:
     description: Bypass chat restrictions
     default: op
@@ -105,3 +108,8 @@ commands:
       - whisper
       - w
       - message
+  attackcooldown:
+    description: Attack cooldown bypass for entities.
+    usage: /attackcooldown
+    aliases:
+      - atkcool
