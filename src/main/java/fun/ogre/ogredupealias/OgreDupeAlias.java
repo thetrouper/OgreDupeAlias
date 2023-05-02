@@ -4,8 +4,6 @@ import fun.ogre.ogredupealias.commands.commands.*;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.events.*;
 import fun.ogre.ogredupealias.plugin.custom.forging.CraftingKeys;
-import io.github.itzispyder.ogredupealias.commands.commands.*;
-import io.github.itzispyder.ogredupealias.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
