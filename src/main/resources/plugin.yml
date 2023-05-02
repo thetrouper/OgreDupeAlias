@@ -1,6 +1,6 @@
 name: OgreDupeAlias
 version: '${version}'
-main: io.github.itzispyder.ogredupealias.OgreDupeAlias
+main: fun.ogre.ogredupealias.OgreDupeAlias
 api-version: 1.19
 prefix: ODA
 authors: [ ImproperIssues, TheTrouper ]
