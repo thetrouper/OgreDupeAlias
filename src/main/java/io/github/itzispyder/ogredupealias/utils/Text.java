@@ -1,11 +1,15 @@
 package io.github.itzispyder.ogredupealias.utils;
 
-import static io.github.itzispyder.ogredupealias.OgreDupeAlias.prefix;
+import io.github.itzispyder.ogredupealias.data.Config;
 
 public class Text {
 
     public static String of(String s) {
         return s;
+    }
+
+    public static String ofAll(String s) {
+        return builder(s).prefix().color().build();
     }
 
     /**
@@ -32,7 +36,7 @@ public class Text {
     }
 
     public static String prefixed(String s) {
-        return prefix() + s;
+        return Config.Plugin.prefix() + s;
     }
 
     public static TextBuilder builder(String s) {

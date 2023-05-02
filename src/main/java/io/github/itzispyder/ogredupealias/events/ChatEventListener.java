@@ -10,6 +10,13 @@ public class ChatEventListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
+        try {
+            this.handleChatConstraints(e);
+        }
+        catch (Exception ignore) {}
+    }
+
+    private void handleChatConstraints(AsyncPlayerChatEvent e) {
         final Player p = e.getPlayer();
         final String msg = e.getMessage();
         final ChatConstraints cc = new ChatConstraints(p,msg);

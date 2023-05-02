@@ -6,27 +6,25 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class InteractionListener implements Listener {
 
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
-        final Player p = e.getPlayer();
-        final Action a = e.getAction();
-
         try {
-            final Block b = e.getClickedBlock();
-            final ItemStack item = e.getItem();
-
-            if (PlacedStructures.isCustomTable(b)) {
-                e.setCancelled(true);
-                p.openInventory(InventoryPresets.createCustomTable());
-                return;
-            }
+            this.processTable(e);
         }
         catch (Exception ignore) {}
+    }
+
+    private void processTable(PlayerInteractEvent e) {
+        final Player p = e.getPlayer();
+        final Block b = e.getClickedBlock();
+
+        if (PlacedStructures.isCustomTable(b)) {
+            e.setCancelled(true);
+            p.openInventory(InventoryPresets.createCustomTable());
+        }
     }
 }

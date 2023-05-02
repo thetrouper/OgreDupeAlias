@@ -12,24 +12,30 @@ public class InventoryActionListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
-        final Inventory inv = e.getClickedInventory();
-        final String title = e.getView().getTitle();
-
         try {
-            if (inv == null) return;
-
-            if (title.equals(Text.color("&eForging Table"))) CustomTable.onInventoryAction(e);
+            this.handleForgeClick(e);
         }
         catch (Exception ignore) {}
     }
 
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
-        final String title = e.getView().getTitle();
-
         try {
-            if (title.equals(Text.color("&eForging Table"))) CustomTable.onInventoryClose(e);
+            this.handleForgeClose(e);
         }
         catch (Exception ignore) {}
+    }
+
+    private void handleForgeClick(InventoryClickEvent e) {
+        final Inventory inv = e.getClickedInventory();
+        final String title = e.getView().getTitle();
+
+        if (inv == null) return;
+        if (title.equals(Text.color("&eForging Table"))) CustomTable.onInventoryAction(e);
+    }
+
+    private void handleForgeClose(InventoryCloseEvent e) {
+        final String title = e.getView().getTitle();
+        if (title.equals(Text.color("&eForging Table"))) CustomTable.onInventoryClose(e);
     }
 }

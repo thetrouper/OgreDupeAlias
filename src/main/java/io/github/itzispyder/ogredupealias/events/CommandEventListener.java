@@ -32,6 +32,13 @@ public class CommandEventListener implements Listener {
 
     @EventHandler
     public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
+        try {
+            this.handleChatCommands(e);
+        }
+        catch (Exception ignore) {}
+    }
+
+    private void handleChatCommands(PlayerCommandPreprocessEvent e) {
         final String msg = e.getMessage();
         final Player p = e.getPlayer();
         final String[] words = msg.split(" ");
