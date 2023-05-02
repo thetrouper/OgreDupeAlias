@@ -1,8 +1,8 @@
 package fun.ogre.ogredupealias.events;
 
-import fun.ogre.ogredupealias.utils.ItemUtils;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
 import fun.ogre.ogredupealias.plugin.RecipientList;
+import fun.ogre.ogredupealias.utils.ItemUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -32,6 +32,7 @@ public class EntityDamageListener implements Listener {
     public void onDamage(EntityDamageEvent e) {
         try {
             this.handleBurstMelee(e);
+            this.handleThornsBypass(e);
         }
         catch (Exception ignore) {}
     }
@@ -47,6 +48,20 @@ public class EntityDamageListener implements Listener {
         }
     }
 
+    public void handleThornsBypass(EntityDamageEvent e) {
+        final Entity ent = e.getEntity();
+        final EntityDamageEvent.DamageCause cause = e.getCause();
+
+        if (cause != EntityDamageEvent.DamageCause.THORNS) return;
+        if (ent instanceof Player p ) {
+            final ItemStack item = p.getInventory().getItemInMainHand();
+
+            if (ItemUtils.getDisplay(item).equals(ItemUtils.getDisplay(ItemPresets.TROLL_SWORD)) || attackCooldownBypassers.isRecipient(p)) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
     public void handleBurstMelee(EntityDamageByEntityEvent e) {
         final Entity victim = e.getEntity();
         final Entity damager = e.getDamager();
@@ -58,7 +73,7 @@ public class EntityDamageListener implements Listener {
 
             final ItemStack item = pDamager.getInventory().getItemInMainHand();
 
-            if (ItemUtils.nbtMatches(item, ItemPresets.TROLL_SWORD) || attackCooldownBypassers.isRecipient(pDamager)) {
+            if (ItemUtils.getDisplay(item).equals(ItemUtils.getDisplay(ItemPresets.TROLL_SWORD)) || attackCooldownBypassers.isRecipient(pDamager)) {
                 vLiving.setNoDamageTicks(NO_DAMAGE_TICKS);
                 vLiving.setMaximumNoDamageTicks(MAX_NO_DAMAGE_TICKS);
             }
