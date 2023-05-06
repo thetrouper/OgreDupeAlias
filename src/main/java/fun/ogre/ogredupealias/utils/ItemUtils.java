@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
 
-public abstract class ItemUtils {
+public final class ItemUtils {
 
     public static String nbtOf(ItemStack item) {
         if (item == null || item.getType().isAir()) return "air{}";

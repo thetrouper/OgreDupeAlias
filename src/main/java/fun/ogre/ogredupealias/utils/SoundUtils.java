@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class SoundUtils {
+public final class SoundUtils {
 
     private static final Map<String,Long> cooldown = new HashMap<>();
 

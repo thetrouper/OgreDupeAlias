@@ -1,6 +1,6 @@
 package fun.ogre.ogredupealias.utils;
 
-public abstract class StringUtils {
+public final class StringUtils {
 
     public static String capitalize(String s) {
         if (s.length() == 1) return s.toUpperCase();

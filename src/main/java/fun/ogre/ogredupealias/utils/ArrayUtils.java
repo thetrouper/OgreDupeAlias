@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class ArrayUtils {
+public final class ArrayUtils {
 
     /**
      * Transforms an array to another one
