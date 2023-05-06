@@ -19,6 +19,11 @@ public class Cooldown<T> {
         return Math.max(getOrDefault(timer.get(obj), 0L) - System.currentTimeMillis(), 0L);
     }
 
+    public double getCooldownSec(T obj) {
+        final long cooldown = this.getCooldown(obj);
+        return MathUtils.round(cooldown / 1000.0, 100);
+    }
+
     public boolean isOnCooldown(T obj) {
         return getCooldown(obj) > 0L;
     }

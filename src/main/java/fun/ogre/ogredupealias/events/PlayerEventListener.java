@@ -3,6 +3,7 @@ package fun.ogre.ogredupealias.events;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.utils.ItemUtils;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,9 +31,22 @@ public class PlayerEventListener implements Listener {
 
     @EventHandler
     public void onConsume(PlayerItemConsumeEvent e) {
+        try {
+            this.handleFood(e);
+        }
+        catch (Exception ignore) {}
+    }
+
+    private void handleFood(PlayerItemConsumeEvent e) {
         final ItemStack item = e.getItem();
         final Player p = e.getPlayer();
 
-        if (ItemUtils.nbtMatches(item,ItemPresets.SNAD_COOKIE)) p.setHealth(0);
+        if (ItemUtils.nbtMatches(item,ItemPresets.SNAD_COOKIE)) {
+            p.setHealth(0);
+        }
+        else if (item.getType() == Material.ENCHANTED_GOLDEN_APPLE) {
+            if (e.isCancelled()) return;
+            p.setCooldown(Material.ENCHANTED_GOLDEN_APPLE, 30 * 20);
+        }
     }
 }

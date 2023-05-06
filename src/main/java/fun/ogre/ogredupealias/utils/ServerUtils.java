@@ -1,5 +1,7 @@
 package fun.ogre.ogredupealias.utils;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -43,5 +45,9 @@ public class ServerUtils {
 
     public static void forEachSpecified(Consumer<Player> consumer, Player... players) {
         Arrays.stream(players).forEach(consumer);
+    }
+
+    public static void sendActionBar(Player p, String msg) {
+        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
     }
 }
