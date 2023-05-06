@@ -13,7 +13,7 @@ public abstract class CraftingKeys {
 
     public static void initRecipes() {
         // my custom
-        register(ItemPresets.TROLL_SWORD,"[dirt{}]");
+        //register(ItemPresets.TROLL_SWORD,"[dirt{}]");
         register(ItemPresets.SNAD,"[sand{}]");
         register(ItemPresets.SNAD_COOKIE,"[air{}, sugar{}, air{}, sand{display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"white\",\"text\":\"Snad\"}],\"text\":\"\"}'}}, cocoa_beans{}, sand{display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"white\",\"text\":\"Snad\"}],\"text\":\"\"}'}}, air{}, sugar{}, air{}]");
         // legendary gear

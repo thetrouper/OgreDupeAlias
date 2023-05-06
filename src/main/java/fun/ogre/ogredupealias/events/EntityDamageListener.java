@@ -23,7 +23,7 @@ public class EntityDamageListener implements Listener {
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent e) {
         try {
-            this.handleBurstMelee(e);
+            //this.handleBurstMelee(e);
         }
         catch (Exception ignore) {}
     }
@@ -31,7 +31,7 @@ public class EntityDamageListener implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         try {
-            this.handleBurstMelee(e);
+            //this.handleBurstMelee(e);
             this.handleThornsBypass(e);
         }
         catch (Exception ignore) {}
