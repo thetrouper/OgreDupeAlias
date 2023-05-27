@@ -13,7 +13,9 @@ public class ChatEventListener implements Listener {
         try {
             this.handleChatConstraints(e);
         }
-        catch (Exception ignore) {}
+        catch (Exception ignore) {
+            ignore.printStackTrace();
+        }
     }
 
     private void handleChatConstraints(AsyncPlayerChatEvent e) {

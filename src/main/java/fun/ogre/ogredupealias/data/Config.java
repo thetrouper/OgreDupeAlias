@@ -6,10 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static fun.ogre.ogredupealias.OgreDupeAlias.instance;
 import static fun.ogre.ogredupealias.OgreDupeAlias.log;
@@ -60,6 +57,16 @@ public abstract class Config {
             }
             public static List<String> blacklist() {
                 return get().getStringList(path + "blacklist");
+            }
+            public static Map<String, String> leetPatterns() {
+                Map<String, String> dictionary = new HashMap<>();
+                ConfigurationSection section = get().getConfigurationSection(path + "leet-patterns");
+
+                if (section == null) return dictionary;
+                for (String key : section.getKeys(false)) {
+                    dictionary.put(key, section.getString(key));
+                }
+                return dictionary;
             }
         }
 

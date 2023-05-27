@@ -3,7 +3,6 @@ package fun.ogre.ogredupealias.plugin;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.ServerUtils;
-import fun.ogre.ogredupealias.utils.StringUtils;
 import fun.ogre.ogredupealias.utils.Text;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -11,6 +10,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.regex.PatternSyntaxException;
 
 public class ChatConstraints {
 
@@ -89,20 +89,21 @@ public class ChatConstraints {
         if (player.hasPermission("oda.chat.bypass.swear")) return true;
 
         // 1
-        String msg = StringUtils.fromLeetString(message);
+        String msg = fromLeetString(message);
         msg = msg.replaceAll("[^A-Za-z0-9]", "").trim();
         // 2
         msg = msg.toLowerCase();
         // 3
         for (String whitelisted : Config.Chat.AntiSwear.whitelist()) {
-            msg = msg.replaceAll(whitelisted.toLowerCase(), "").trim();
+            String key = whitelisted.toLowerCase().replaceAll(" ", "");
+            msg = msg.replaceAll(key, "").trim();
         }
         // 4
         msg = msg.replaceAll("[. _-]", "");
         // 5
         List<String> flags = new ArrayList<>();
         for (String blacklisted : Config.Chat.AntiSwear.blacklist()) {
-            String key = blacklisted.toLowerCase();
+            String key = blacklisted.toLowerCase().replaceAll(" ", "");
             if (msg.contains(key)) {
                 flags.add(blacklisted);
                 msg = msg.replaceAll(key, Text.color("&e" + key + "&f"));
@@ -158,5 +159,27 @@ public class ChatConstraints {
 
     public static boolean isChatMuted() {
         return isChatMuted;
+    }
+
+    public static String fromLeetString(String s) {
+        Map<String, String> dictionary = Config.Chat.AntiSwear.leetPatterns();
+        String msg = s;
+
+        for (String key : dictionary.keySet()) {
+            if (!s.contains(key)) continue;
+            try {
+                if (key.equals("$")) {
+                    msg = msg.replaceAll("\\$", "s");
+                }
+                else {
+                    msg = msg.replaceAll(key, dictionary.get(key));
+                }
+            }
+            catch (PatternSyntaxException ex) {
+                String regex = "[" + key + "]";
+                msg = msg.replaceAll(regex, dictionary.get(key));
+            }
+        }
+        return msg;
     }
 }
