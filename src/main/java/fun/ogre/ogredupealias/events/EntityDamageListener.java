@@ -41,8 +41,8 @@ public class EntityDamageListener implements Listener {
 
         if (cause.name().contains("ENTITY")) return;
         if (ent instanceof LivingEntity eLiving) {
-            eLiving.setNoDamageTicks(14);
-            eLiving.setMaximumNoDamageTicks(15);
+            eLiving.setNoDamageTicks(DEFAULT_NO_DAMAGE_TICKS);
+            eLiving.setMaximumNoDamageTicks(DEFAULT_MAX_NO_DAMAGE_TICKS);
         }
     }
 

@@ -3,7 +3,10 @@ package fun.ogre.ogredupealias.plugin;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.ServerUtils;
+import fun.ogre.ogredupealias.utils.StringUtils;
 import fun.ogre.ogredupealias.utils.Text;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
@@ -73,39 +76,55 @@ public class ChatConstraints {
         return false;
     }
 
+    /**
+     * 1: Strip special characters
+     * 2: lowercase the text
+     * 3: remove the known false positives
+     * 4: remove periods and spaces
+     * 5: scan for swears
+     * 6: notify the player (do not tell them what they flagged, only that they flagged it and that attempts to bypass will result in a mute)
+     * 7: notify staff (send the original message and the trimmed string) highlighting the flagged word (listing the keywords violated as a hover text)
+     */
     public boolean passSwear() {
         if (!Config.Chat.AntiSwear.enabled()) return true;
         if (player.hasPermission("oda.chat.bypass.swear")) return true;
 
-        String s = message.toLowerCase().replaceAll("[^a-z0-9]","");
-        String d = s;
-        List<String> caught = new ArrayList<>();
-
+        // 1
+        String msg = message.replaceAll("[^A-Za-z0-9]", "").trim();
+        // 2
+        msg = msg.toLowerCase();
+        // 3
         for (String whitelisted : Config.Chat.AntiSwear.whitelist()) {
-            s = s.replaceAll(whitelisted.toLowerCase(),"");
+            msg = msg.replaceAll(whitelisted.toLowerCase(), "").trim();
         }
-
+        // 4
+        msg = msg.replaceAll("[. _-]", "");
+        // 5
+        List<String> flags = new ArrayList<>();
         for (String blacklisted : Config.Chat.AntiSwear.blacklist()) {
-            if (s.contains(blacklisted.toLowerCase())) {
-                caught.add(blacklisted);
-                d = d.replaceAll(blacklisted, Text.color("&e" + blacklisted + "&f"));
+            String key = blacklisted.toLowerCase();
+            if (msg.contains(key)) {
+                flags.add(blacklisted);
+                msg = msg.replaceAll(key, Text.color("&e" + key + "&f"));
             }
         }
+        // 6
+        if (!flags.isEmpty()) {
+            player.sendMessage(Text.ofAll("&cPlease do not swear in chat! Attempting to bypass this filter would result in a mute!"));
+            // 7
+            String hover = Text.color("&bMessage: &f" + msg + "\n&bFlags: &f" + ArrayUtils.list2string(flags) + "\n&7&o(click to copy)");
+            TextComponent text = new TextComponent();
+            text.setText(Text.ofAll("&f&n" + player.getName() + "&e has triggered the anti-swear!"));
+            text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(hover)));
+            text.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, this.message));
 
-        if (caught.isEmpty()) return true;
+            ServerUtils.forEachPlayer(staff -> {
+                staff.spigot().sendMessage(text);
+            });
+            return false;
+        }
 
-        String warn = ArrayUtils.list2string(caught);
-        TextComponent text = new TextComponent();
-        text.setText(Text.builder("\n&cMessage: &f" + d + "\n&cCaught: &e" + warn).prefix().color().build());
-        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(Text.color("&cMessage: &f" + d + "\n&cCaught: &e" + warn))));
-
-        player.sendMessage(Text.builder("&cPlease do not swear in chat!").color().prefix().build());
-        player.spigot().sendMessage(text);
-        ServerUtils.forEachStaff(staff -> {
-            staff.sendMessage(Text.builder("&b" + player.getName() + " &3has triggered the &bAntiSwear&3:").prefix().color().build());
-            staff.spigot().sendMessage(text);
-        });
-        return false;
+        return true;
     }
 
     private String removeColors(String msg) {
