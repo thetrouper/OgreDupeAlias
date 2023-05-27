@@ -3,9 +3,7 @@ package fun.ogre.ogredupealias.plugin;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.ServerUtils;
-import fun.ogre.ogredupealias.utils.StringUtils;
 import fun.ogre.ogredupealias.utils.Text;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -118,7 +116,7 @@ public class ChatConstraints {
             text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(hover)));
             text.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, this.message));
 
-            ServerUtils.forEachPlayer(staff -> {
+            ServerUtils.forEachStaff(staff -> {
                 staff.spigot().sendMessage(text);
             });
             return false;
