@@ -15,4 +15,20 @@ public final class StringUtils {
         for (String str : sArray) sb.append(capitalize(str)).append(" ");
         return sb.toString().trim();
     }
+
+    public static String fromLeetString(String s) {
+        return s.replaceAll("0", "o")
+                .replaceAll("1", "i")
+                .replaceAll("3", "e")
+                .replaceAll("4", "a")
+                .replaceAll("5", "s")
+                .replaceAll("7", "l")
+                .replaceAll("\\$", "s")
+                .replaceAll("!", "i")
+                .replaceAll("\\+", "t")
+                .replaceAll("#", "h")
+                .replaceAll("@", "a")
+                .replaceAll("<", "c")
+                .replaceAll("v", "u");
+    }
 }

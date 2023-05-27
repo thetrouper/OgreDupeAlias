@@ -3,6 +3,7 @@ package fun.ogre.ogredupealias.plugin;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.ServerUtils;
+import fun.ogre.ogredupealias.utils.StringUtils;
 import fun.ogre.ogredupealias.utils.Text;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -88,7 +89,8 @@ public class ChatConstraints {
         if (player.hasPermission("oda.chat.bypass.swear")) return true;
 
         // 1
-        String msg = message.replaceAll("[^A-Za-z0-9]", "").trim();
+        String msg = StringUtils.fromLeetString(message);
+        msg = msg.replaceAll("[^A-Za-z0-9]", "").trim();
         // 2
         msg = msg.toLowerCase();
         // 3
@@ -110,7 +112,7 @@ public class ChatConstraints {
         if (!flags.isEmpty()) {
             player.sendMessage(Text.ofAll("&cPlease do not swear in chat! Attempting to bypass this filter would result in a mute!"));
             // 7
-            String hover = Text.color("&bMessage: &f" + msg + "\n&bFlags: &f" + ArrayUtils.list2string(flags) + "\n&7&o(click to copy)");
+            String hover = Text.color("&bOriginal: &f" + this.message + "\n&bMessage: &f" + msg + "\n&bFlags: &f" + ArrayUtils.list2string(flags) + "\n&7&o(click to copy)");
             TextComponent text = new TextComponent();
             text.setText(Text.ofAll("&f&n" + player.getName() + "&e has triggered the anti-swear!"));
             text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(hover)));
