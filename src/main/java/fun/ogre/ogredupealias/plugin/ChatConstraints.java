@@ -9,7 +9,10 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.PatternSyntaxException;
 
 public class ChatConstraints {
@@ -96,7 +99,9 @@ public class ChatConstraints {
         // 3
         for (String whitelisted : Config.Chat.AntiSwear.whitelist()) {
             String key = whitelisted.toLowerCase().replaceAll(" ", "");
-            msg = msg.replaceAll(key, "").trim();
+            if (msg.contains(key)) {
+                msg = msg.replaceAll(key, "").trim();
+            }
         }
         // 4
         msg = msg.replaceAll("[. _-]", "");
@@ -129,9 +134,12 @@ public class ChatConstraints {
     }
 
     private String removeColors(String msg) {
-        return String.join(" ", Arrays.stream(msg.split(" "))
-                .filter(s -> !(s.length() >= 1 && s.charAt(0) == '§'))
-                .toList());
+        String s = msg;
+        while (s.length() >= 2 && s.contains("§")) {
+            int index = s.indexOf("§");
+            s = s.replaceAll(s.substring(index, index + 2), "");
+        }
+        return s;
     }
 
     public double getChatCooldown() {
