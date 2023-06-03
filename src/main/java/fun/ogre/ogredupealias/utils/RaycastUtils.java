@@ -5,12 +5,13 @@ import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static fun.ogre.ogredupealias.OgreDupeAlias.instance;
 
-public class RaycastUtils {
+public final class RaycastUtils {
 
     public static Location raycast(Location start, Location end, Predicate<Location> hitCondition) {
         return raycast(start, end, 0.5, hitCondition);
@@ -34,7 +35,7 @@ public class RaycastUtils {
         return start.clone().add(rotation.clone().multiply(distance));
     }
 
-    public static void raycast(Location start, Vector rotation, double distance, double frequency, long tickInterval, Predicate<Location> hitCondition, Consumer<Location> onhit) {
+    public static void raycast(Location start, Vector rotation, double distance, double frequency, long tickInterval, BiPredicate<Location, Double> hitCondition, Consumer<Location> onhit) {
         AtomicReference<Location> result = new AtomicReference<>();
         AtomicReference<Double> val = new AtomicReference<>(0.0);
         AtomicReference<Boolean> active = new AtomicReference<>(true);
@@ -42,7 +43,7 @@ public class RaycastUtils {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(instance, () -> {
             if (val.get() <= distance && result.get() == null && active.get()) {
                 Location point = start.clone().add(rotation.clone().multiply(val.get()));
-                if (hitCondition.test(point)) {
+                if (hitCondition.test(point, val.get())) {
                     result.set(point);
                 }
                 val.set(val.get() + frequency);
