@@ -51,4 +51,12 @@ public abstract class ItemPresets {
             .enchant(Enchantment.LURE,1)
             .flag(ItemFlag.HIDE_ENCHANTS)
             .build();
+
+    public static ItemStack NETSKY_BLADE = ItemBuilder.create()
+            .material(Material.NETHERITE_SWORD)
+            .name(Text.color("&7//&d&l&oNET&5&l&oSKY&7//"))
+            .lore(Text.color("&7- &dLeft: &5Fire Spell"))
+            .lore(Text.color("&7- &dRight: &5Fireball"))
+            .enchant(Enchantment.FIRE_ASPECT, 1)
+            .build();
 }

@@ -50,4 +50,8 @@ public final class ItemUtils {
         if (meta == null) return def;
         return meta.hasDisplayName() ? meta.getDisplayName() : def;
     }
+
+    public static boolean matchDisplay(ItemStack item, ItemStack item2) {
+        return getDisplay(item).equals(getDisplay(item2));
+    }
 }

@@ -1,6 +1,7 @@
 package fun.ogre.ogredupealias.data.builder;
 
 import fun.ogre.ogredupealias.data.Direction;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -70,6 +71,10 @@ public class BlockPosMatcher {
     }
 
     public static BlockPosMatcher of(Block block) {
-        return new BlockPosMatcher(block);
+        return new BlockPosMatcher(block != null ? block : getZero());
+    }
+
+    public static Block getZero() {
+        return new Location(Bukkit.getWorlds().get(0), 0, 0, 0).getBlock();
     }
 }
