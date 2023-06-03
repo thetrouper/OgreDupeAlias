@@ -58,7 +58,7 @@ public class SoundPlayer {
      */
     public void playWithin(double distance) {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (p != null && p.getWorld() == this.location.getWorld() && p.getLocation().distanceSquared(this.location) < distance) {
+            if (p != null && p.getWorld() == this.location.getWorld() && p.getLocation().distance(this.location) < distance) {
                 p.playSound(this.location,this.sound,this.volume,this.pitch);
             }
         }
@@ -71,7 +71,7 @@ public class SoundPlayer {
      */
     public void playWithinAt(double distance) {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (p != null && p.getWorld() == this.location.getWorld() && p.getLocation().distanceSquared(this.location) < distance) {
+            if (p != null && p.getWorld() == this.location.getWorld() && p.getLocation().distance(this.location) < distance) {
                 p.playSound(p.getLocation(),this.sound,this.volume,this.pitch);
             }
         }
