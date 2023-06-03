@@ -3,7 +3,10 @@ package fun.ogre.ogredupealias.events;
 import fun.ogre.ogredupealias.data.PlacedStructures;
 import fun.ogre.ogredupealias.plugin.InventoryPresets;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.utils.*;
+import fun.ogre.ogredupealias.utils.Cooldown;
+import fun.ogre.ogredupealias.utils.ItemUtils;
+import fun.ogre.ogredupealias.utils.RaycastUtils;
+import fun.ogre.ogredupealias.utils.SoundPlayer;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -68,14 +71,9 @@ public class InteractionListener implements Listener {
                         World w = point.getWorld();
                         SoundPlayer popSound = new SoundPlayer(start, Sound.BLOCK_LAVA_POP, 1, 1);
                         SoundPlayer hissSound = new SoundPlayer(start, Sound.BLOCK_LAVA_EXTINGUISH, 1, 1);
-                        double radius = 1;
-                        double x = radius * Math.sin(distance);
-                        double y = radius * Math.sin(point.getY());
-                        double z = radius * Math.cos(distance);
 
-                        w.spawnParticle(Particle.SOUL_FIRE_FLAME, point.clone().add(x, y, z), 10, 0, 0, 0, 0);
                         w.spawnParticle(Particle.FLAME, point, 1, 0, 0, 0, 0);
-                        w.spawnParticle(Particle.LAVA, point, 5, 0, 0, 0, 0);
+                        w.spawnParticle(Particle.LAVA, point, 1, 0, 0, 0, 0);
                         popSound.playWithin(3);
 
                         List<Entity> targets = new ArrayList<>(w.getNearbyEntities(point, 2, 2, 2, entity -> {
@@ -100,9 +98,6 @@ public class InteractionListener implements Listener {
                         explodeSound.playWithin(500);
                         w.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, result, 20, 0, 0, 0, 0.1);
                         w.spawnParticle(Particle.LAVA, result, 120, 0, 0, 0, 1);
-                        DisplayUtils.wave(result, 3, 1, 3, point -> {
-                            point.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, point, 1, 0, 0, 0, 0);
-                        });
                     });
                 }
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> {
