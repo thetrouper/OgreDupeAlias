@@ -3,10 +3,7 @@ package fun.ogre.ogredupealias.events;
 import fun.ogre.ogredupealias.data.PlacedStructures;
 import fun.ogre.ogredupealias.plugin.InventoryPresets;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.utils.Cooldown;
-import fun.ogre.ogredupealias.utils.ItemUtils;
-import fun.ogre.ogredupealias.utils.RaycastUtils;
-import fun.ogre.ogredupealias.utils.SoundPlayer;
+import fun.ogre.ogredupealias.utils.*;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -101,14 +98,28 @@ public class InteractionListener implements Listener {
                     });
                 }
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> {
-                    Location start = p.getEyeLocation();
-                    Vector rotation = p.getLocation().getDirection().normalize();
+                    if (p.isSneaking()) {
+                        Location center = p.getLocation();
 
-                    p.getWorld().spawn(start, Fireball.class, fireball -> {
-                        fireball.setDirection(rotation);
-                        fireball.setVelocity(rotation);
-                        fireball.setShooter(p);
-                    });
+                        DisplayUtils.ring(center, 10, circlePoint -> {
+                            RaycastUtils.raycast(center, circlePoint, point -> {
+                                point.getWorld().spawnParticle(Particle.END_ROD, point, 1, 0, 0, 0, 0);
+                                return false;
+                            });
+                        }, (point, angle) -> {
+                            return angle % 9 == 0;
+                        });
+                    }
+                    else {
+                        Location start = p.getEyeLocation();
+                        Vector rotation = p.getLocation().getDirection().normalize();
+
+                        p.getWorld().spawn(start, Fireball.class, fireball -> {
+                            fireball.setDirection(rotation);
+                            fireball.setVelocity(rotation);
+                            fireball.setShooter(p);
+                        });
+                    }
                 }
             }
         }
