@@ -44,6 +44,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new EntityDamageListener(),this);
 
         // Commands
+        getCommand("forcefield").setExecutor(new ForceFieldCommand());
         getCommand("config").setExecutor(new ConfigCommand());
         getCommand("config").setTabCompleter(new ConfigCommand());
         getCommand("mutechat").setExecutor(new MuteChatCommand());

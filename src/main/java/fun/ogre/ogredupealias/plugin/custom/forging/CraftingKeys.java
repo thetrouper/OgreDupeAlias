@@ -2,6 +2,7 @@ package fun.ogre.ogredupealias.plugin.custom.forging;
 
 import fun.ogre.ogredupealias.plugin.ItemPresets;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -13,7 +14,11 @@ public abstract class CraftingKeys {
 
     public static void initRecipes() {
         // my custom
+        register(ItemPresets.LASER_POINTER, "[polished_blackstone_button{}, lime_concrete{}, lime_stained_glass{}, lime_concrete{}, diamond{}, lime_concrete{}, stick{}, lime_concrete{}, air{}]");
+        register(ItemPresets.DEFENDER, "[iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, prismarine_shard{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}]");
+        register(ItemPresets.ADMIN_UTILITY, "[air{}, air{}, barrier{}, air{}, blaze_rod{}, air{}, blaze_rod{}, air{}, air{}]");
         register(ItemPresets.NETSKY_BLADE, "[end_crystal{}, ender_pearl{}]");
+        register(ItemPresets.VOID_CHARM, "[black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, barrier{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}]");
         //register(ItemPresets.TROLL_SWORD,"[dirt{}]");
         register(ItemPresets.SNAD,"[sand{}]");
         register(ItemPresets.SNAD_COOKIE,"[air{}, sugar{}, air{}, sand{display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"white\",\"text\":\"Snad\"}],\"text\":\"\"}'}}, cocoa_beans{}, sand{display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"white\",\"text\":\"Snad\"}],\"text\":\"\"}'}}, air{}, sugar{}, air{}]");

@@ -115,3 +115,9 @@ commands:
     aliases:
       - atkcool
       - attackcool
+  forcefield:
+    description: Draws an impassible forcefield around you
+    usage: /forcefield
+    permission: oda.commands.forcefield
+    aliases:
+      - /ff
