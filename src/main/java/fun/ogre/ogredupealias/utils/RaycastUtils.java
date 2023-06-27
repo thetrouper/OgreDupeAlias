@@ -57,4 +57,25 @@ public final class RaycastUtils {
             }
         }, 0, tickInterval);
     }
+
+    public static Vector randomVector(Vector baseVector, double angle) {
+        // Generate a random angle within the given range
+        double randomAngle = Math.random() * angle;
+
+        // Generate a random rotation axis
+        double randomAxisX = Math.random() - 0.5;
+        double randomAxisY = Math.random() - 0.5;
+        double randomAxisZ = Math.random() - 0.5;
+
+        // Normalize the rotation axis
+        Vector rotationAxis = new Vector(randomAxisX, randomAxisY, randomAxisZ).normalize();
+
+        // Calculate the rotation angle
+        double rotationAngle = Math.toRadians(randomAngle);
+
+        // Rotate the base vector around the rotation axis
+        Vector offsetVector = baseVector.clone().rotateAroundAxis(rotationAxis, rotationAngle);
+
+        return offsetVector;
+    }
 }

@@ -3,6 +3,7 @@ package fun.ogre.ogredupealias.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -53,5 +54,14 @@ public final class ItemUtils {
 
     public static boolean matchDisplay(ItemStack item, ItemStack item2) {
         return getDisplay(item).equals(getDisplay(item2));
+    }
+    public static int itemCount(Player p, Material material) {
+        int count = 0;
+        for (ItemStack i : p.getInventory().getContents()) {
+            if (i != null && i.getType() == material) {
+                count += i.getAmount();
+            }
+        }
+        return count;
     }
 }

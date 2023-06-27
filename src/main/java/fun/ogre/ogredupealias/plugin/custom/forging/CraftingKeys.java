@@ -14,10 +14,14 @@ public abstract class CraftingKeys {
 
     public static void initRecipes() {
         // my custom
+        register(ItemPresets.POTATOCANNON, "[potato{}, potato{}, potato{}, potato{}, golden_hoe{}, potato{}, potato{}, potato{}, potato{}]");
         register(ItemPresets.LASER_POINTER, "[polished_blackstone_button{}, lime_concrete{}, lime_stained_glass{}, lime_concrete{}, diamond{}, lime_concrete{}, stick{}, lime_concrete{}, air{}]");
         register(ItemPresets.DEFENDER, "[iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, prismarine_shard{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}]");
         register(ItemPresets.ADMIN_UTILITY, "[air{}, air{}, barrier{}, air{}, blaze_rod{}, air{}, blaze_rod{}, air{}, air{}]");
         register(ItemPresets.NETSKY_BLADE, "[end_crystal{}, ender_pearl{}]");
+        register(ItemPresets.SNOWCHINEGUN, "[snowball{}, snowball{}, snowball{}, snowball{}, iron_shovel{}, snowball{}, snowball{}, snowball{}, snowball{}]");
+        register(ItemPresets.SPLEEFER, "[snowball{}, snowball{}, snowball{}, snowball{}, netherite_shovel{}, snowball{}, snowball{}, snowball{}, snowball{}]");
+        register(ItemPresets.AK47, "[iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, echo_shard{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}]");
         register(ItemPresets.VOID_CHARM, "[black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, barrier{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}, black_stained_glass{}]");
         //register(ItemPresets.TROLL_SWORD,"[dirt{}]");
         register(ItemPresets.SNAD,"[sand{}]");

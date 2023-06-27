@@ -4,6 +4,7 @@ import fun.ogre.ogredupealias.commands.commands.*;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.events.*;
 import fun.ogre.ogredupealias.plugin.custom.forging.CraftingKeys;
+import fun.ogre.ogredupealias.plugin.funitems.PotatoCannon;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,6 +43,9 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new InteractionListener(),this);
         pm.registerEvents(new InventoryActionListener(),this);
         pm.registerEvents(new EntityDamageListener(),this);
+        pm.registerEvents(new SnowBallListener(), this);
+        pm.registerEvents(new TurfWarsEventListener(), this);
+        pm.registerEvents(new PotatoCannon(), this);
 
         // Commands
         getCommand("forcefield").setExecutor(new ForceFieldCommand());

@@ -29,8 +29,14 @@ permissions:
   oda.commands.irepair:
     description: Access to irepair.
     default: op
+  oda.commands.givecustoms:
+    description: access custom items
+    default: op
   oda.commands.attackcooldown:
     description: Access to attackcooldown.
+    default: op
+  oda.chat.seeflags:
+    description: Receive the chat filter flags
     default: op
   oda.chat.bypass:
     description: Bypass chat restrictions
