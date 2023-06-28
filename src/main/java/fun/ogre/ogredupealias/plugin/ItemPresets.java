@@ -141,4 +141,10 @@ public abstract class ItemPresets {
             .flag(ItemFlag.HIDE_ENCHANTS)
             .flag(ItemFlag.HIDE_UNBREAKABLE)
             .build();
+    public static ItemStack SPBRifle = ItemBuilder.create()
+            .material(Material.IRON_HORSE_ARMOR)
+            .name(Text.color("&f[SPB] &eRifle"))
+            .lore(Text.color("&7&e▪ &fRight-Click:&7 Shoot"))
+            .customModelData(1111)
+            .build();
 }

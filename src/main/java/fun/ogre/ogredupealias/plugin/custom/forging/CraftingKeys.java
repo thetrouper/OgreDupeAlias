@@ -14,6 +14,7 @@ public abstract class CraftingKeys {
 
     public static void initRecipes() {
         // my custom
+        register(ItemPresets.SPBRifle, "[iron_horse_armor{}]");
         register(ItemPresets.POTATOCANNON, "[potato{}, potato{}, potato{}, potato{}, golden_hoe{}, potato{}, potato{}, potato{}, potato{}]");
         register(ItemPresets.LASER_POINTER, "[polished_blackstone_button{}, lime_concrete{}, lime_stained_glass{}, lime_concrete{}, diamond{}, lime_concrete{}, stick{}, lime_concrete{}, air{}]");
         register(ItemPresets.DEFENDER, "[iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, prismarine_shard{}, iron_nugget{}, iron_nugget{}, iron_nugget{}, iron_nugget{}]");

@@ -39,6 +39,8 @@ public class InteractionListener implements Listener {
             SnowChinegun.handleSnowChinegun(e);
             AK47.handleAK47(e);
             PotatoCannon.handlePotatoCannon(e);
+            PlayerEventListener.handleEnderPearls(e);
+            SPBItems.handleRifle(e);
         }
         catch (Exception ignore) {}
     }

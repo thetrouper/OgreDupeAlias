@@ -15,9 +15,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static org.bukkit.event.block.Action.RIGHT_CLICK_AIR;
-import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
-
 public class PlayerEventListener implements Listener {
 
     @EventHandler
@@ -43,7 +40,7 @@ public class PlayerEventListener implements Listener {
         catch (Exception ignore) {}
     }
 
-    private void handleEnderPearls(PlayerInteractEvent e) {
+    public static void handleEnderPearls(PlayerInteractEvent e) {
         ItemStack item = e.getItem();
         Player p = e.getPlayer();
         Action a = e.getAction();

@@ -56,26 +56,6 @@ public class ServerUtils {
         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
     }
 
-
-    public static boolean hasTag(Player p, String tag) {
-        return p.getScoreboardTags().contains(tag);
-    }
-    public static void addTag(Player p, String tag) {
-        p.getScoreboardTags().add(tag);
-    }
-    public static void removeTag(Player p, String tag) {
-        p.getScoreboardTags().remove(tag);
-    }
-    public static boolean hasSameTag(Player p1, Player p2, String tag) {
-        return hasTag(p1, tag) == hasTag(p2, tag);
-    }
-    public static void safeKill(Player p) {
-        if (p.getBedSpawnLocation() == null) return;
-        p.teleport(p.getBedSpawnLocation());
-        Bukkit.getScheduler().runTaskLater(OgreDupeAlias.instance, () -> {
-            p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
-        }, 10);
-    }
     public static boolean hasBlockBelow(Player player, Material material) {
         for (int y = player.getLocation().getBlockY() - 1; y >= player.getLocation().getBlockY() - 12; y--) {
             if (player.getWorld().getBlockAt(player.getLocation().getBlockX(), y, player.getLocation().getBlockZ()).getType() == material) {
