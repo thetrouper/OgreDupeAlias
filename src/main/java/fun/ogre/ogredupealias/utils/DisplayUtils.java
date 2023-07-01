@@ -1,6 +1,7 @@
 package fun.ogre.ogredupealias.utils;
 
 import fun.ogre.ogredupealias.OgreDupeAlias;
+import fun.ogre.ogredupealias.data.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,22 +22,17 @@ public final class DisplayUtils {
 
     public static void tempBlocks(Block centerBlock, Material desiredMaterial, int radius, int tickDuration) {
         Location loc = centerBlock.getLocation();
-        List<Block> blocks = new ArrayList<>();
+        List<BlockStorage> blocks = new ArrayList<>();
         forEachBlockIn(loc.clone().add(radius,radius,radius), loc.clone().subtract(radius,radius,radius), (point) -> {
             Block b = point.getBlock();
             if (!b.getType().isAir() && loc.distance(point) <= radius) {
-                blocks.add(b);
+                blocks.add(new BlockStorage(b));
                 b.setType(desiredMaterial);
             }
         });
         Bukkit.getScheduler().runTaskLater(instance, () -> {
-            for (Block block : blocks) {
-                Location point = block.getLocation();
-                Block b2 = point.getBlock();
-                b2.setType(block.getType());
-                b2.setBlockData(block.getBlockData());
-            }
-        }, 60);
+            blocks.forEach(BlockStorage::restore);
+        }, tickDuration);
     }
 
     public static void forEachBlockIn(Location start, Location end, Consumer<Location> action) {

@@ -37,11 +37,11 @@ public class SPBEventListener implements Listener {
                             switch (tag) {
                                 case "SPBfire" -> {
                                     shooter.sendMessage("You were fire");
-                                    DisplayUtils.tempBlocks(e.getHitBlock(),Material.RED_TERRACOTTA,2,600);
+                                    DisplayUtils.tempBlocks(e.getHitBlock(),Material.RED_TERRACOTTA,2,60);
                                 }
                                 case "SPBfrost" -> {
                                     shooter.sendMessage("You were frost");
-                                    DisplayUtils.tempBlocks(e.getHitBlock(),Material.BLUE_TERRACOTTA,2,600);
+                                    DisplayUtils.tempBlocks(e.getHitBlock(),Material.BLUE_TERRACOTTA,2,60);
                                 }
                             }
                         }
