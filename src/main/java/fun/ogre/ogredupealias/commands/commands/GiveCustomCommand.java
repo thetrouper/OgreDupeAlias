@@ -52,6 +52,18 @@ public class GiveCustomCommand implements TabExecutor {
                     p.getInventory().addItem(ItemPresets.SPLEEFER);
                     p.sendMessage(Text.ofAll("&bGiven you a Spleefer"));
                 }
+                case "PotatoCannon" -> {
+                    p.getInventory().addItem(ItemPresets.POTATOCANNON);
+                    p.sendMessage(Text.ofAll("&bGiven you a potato cannon"));
+                }
+                case "LaserPointer" -> {
+                    p.getInventory().addItem(ItemPresets.LASER_POINTER);
+                    p.sendMessage(Text.ofAll("&bGiven you a Laser Pointer"));
+                }
+                case "Pickler" -> {
+                    p.getInventory().addItem(ItemPresets.PICKLER);
+                    p.sendMessage(Text.ofAll("&bGiven you a Pickler"));
+                }
             }
         }
         catch (Exception ex) {
@@ -72,7 +84,9 @@ public class GiveCustomCommand implements TabExecutor {
                         "NetSkyBlade",
                         "SnowChinegun",
                         "VoidCharm",
-                        "Spleefer"
+                        "Spleefer",
+                        "PotatoCannon",
+                        "LaserPointer"
                 })
                 .build();
     }

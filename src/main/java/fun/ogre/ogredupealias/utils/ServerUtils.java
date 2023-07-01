@@ -51,7 +51,13 @@ public class ServerUtils {
     public static void forEachSpecified(Consumer<Player> consumer, Player... players) {
         Arrays.stream(players).forEach(consumer);
     }
-
+    public static void forEachPlayerRun(Predicate<Player> condition, Consumer<Player> task) {
+        forEachPlayer(p -> {
+            if (condition.test(p)) {
+                task.accept(p);
+            }
+        });
+    }
     public static void sendActionBar(Player p, String msg) {
         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
     }

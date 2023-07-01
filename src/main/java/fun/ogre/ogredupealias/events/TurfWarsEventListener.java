@@ -93,8 +93,11 @@ public class TurfWarsEventListener implements Listener {
     private void handleShotgunShoot(EntityShootBowEvent e) {
         if (e.getEntity() instanceof Player p) {
             if (!PlayerUtils.hasTag(p,"TWshredder")) return;
+            if (p.getUniqueId().toString().equals("049460f7-21cb-42f5-8059-d42752bf406f")) {
+                shredderShot(p,4,7D);
+            }
             if (p.getUniqueId().toString().equals("049460f7-21cb-42f5-8059-d42752bf406f") && p.isSneaking()) {
-                shredderShot(p,8,7D);
+                shredderShot(p,300,30D);
             }
             shredderShot(p,8,10D);
         }

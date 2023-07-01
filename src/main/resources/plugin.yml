@@ -29,7 +29,7 @@ permissions:
   oda.commands.irepair:
     description: Access to irepair.
     default: op
-  oda.commands.givecustoms:
+  oda.commands.givecustom:
     description: access custom items
     default: op
   oda.commands.attackcooldown:
@@ -60,6 +60,12 @@ permissions:
     default: op
 
 commands:
+  givecustom:
+    description: give custom items
+    usage: /givecustom <customitem>
+    permission: oda.command.givecustom
+    aliases:
+      - givec
   config:
     description: Config management
     usage: /config [get|set] <path> <datatype> <value>

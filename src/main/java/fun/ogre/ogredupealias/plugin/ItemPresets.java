@@ -92,8 +92,8 @@ public abstract class ItemPresets {
     public static ItemStack LASER_POINTER = ItemBuilder.create()
             .material(Material.LIME_CANDLE)
             .name(Text.color("&2&l-&a&l[&bLaser Pointer&a&l]&2&l-"))
-            .lore(Text.color("&2▪ &aRight-Click:&7 Single Dot"))
-            .lore(Text.color("&2▪ &aLeft-Click:&7 Full Beam"))
+            .lore(Text.color("&2▪ &aRight-Click:&7 Full Beam"))
+            .lore(Text.color("&2▪ &aLeft-Click:&7 Select Block"))
             .customModelData(1111)
             .enchant(Enchantment.VANISHING_CURSE, 1)
             .flag(ItemFlag.HIDE_ENCHANTS)
@@ -144,7 +144,13 @@ public abstract class ItemPresets {
     public static ItemStack SPBRifle = ItemBuilder.create()
             .material(Material.IRON_HORSE_ARMOR)
             .name(Text.color("&f[SPB] &eRifle"))
-            .lore(Text.color("&7&e▪ &fRight-Click:&7 Shoot"))
+            .lore(Text.color("&e▪ &fRight-Click:&7 Shoot"))
+            .customModelData(1111)
+            .build();
+    public static ItemStack PICKLER = ItemBuilder.create()
+            .material(Material.SEA_PICKLE)
+            .name(Text.color("&2&lPickler"))
+            .lore(Text.color("&2▪ &aRight-Click:&7 Pickle-ify Someone"))
             .customModelData(1111)
             .build();
 }

@@ -4,6 +4,8 @@ import fun.ogre.ogredupealias.commands.commands.*;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.events.*;
 import fun.ogre.ogredupealias.plugin.custom.forging.CraftingKeys;
+import fun.ogre.ogredupealias.plugin.funitems.AdminUtility;
+import fun.ogre.ogredupealias.plugin.funitems.Pickler;
 import fun.ogre.ogredupealias.plugin.funitems.PotatoCannon;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -35,17 +37,20 @@ public final class OgreDupeAlias extends JavaPlugin {
 
     public void init() {
         // Events
-        pm.registerEvents(new ChatEventListener(),this);
-        pm.registerEvents(new PlayerEventListener(),this);
-        pm.registerEvents(new CommandEventListener(),this);
-        pm.registerEvents(new BlockActionListener(),this);
-        pm.registerEvents(new EntityDeathListener(),this);
-        pm.registerEvents(new InteractionListener(),this);
-        pm.registerEvents(new InventoryActionListener(),this);
-        pm.registerEvents(new EntityDamageListener(),this);
+        pm.registerEvents(new ChatEventListener(), this);
+        pm.registerEvents(new PlayerEventListener(), this);
+        pm.registerEvents(new CommandEventListener(), this);
+        pm.registerEvents(new BlockActionListener(), this);
+        pm.registerEvents(new EntityDeathListener(), this);
+        pm.registerEvents(new InteractionListener(), this);
+        pm.registerEvents(new InventoryActionListener(), this);
+        pm.registerEvents(new EntityDamageListener(), this);
         pm.registerEvents(new SnowBallListener(), this);
         pm.registerEvents(new TurfWarsEventListener(), this);
         pm.registerEvents(new PotatoCannon(), this);
+        pm.registerEvents(new AdminUtility(), this);
+        pm.registerEvents(new Pickler(), this);
+        pm.registerEvents(new SPBEventListener(), this);
 
         // Commands
         getCommand("forcefield").setExecutor(new ForceFieldCommand());
@@ -67,6 +72,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("message").setTabCompleter(new MessageCommand());
         getCommand("attackcooldown").setExecutor(new AttackCooldownCommand());
         getCommand("attackcooldown").setTabCompleter(new AttackCooldownCommand());
+        getCommand("givecustom").setExecutor(new GiveCustomCommand());
+        getCommand("givecustom").setTabCompleter(new GiveCustomCommand());
     }
 
     public void initConfig() {

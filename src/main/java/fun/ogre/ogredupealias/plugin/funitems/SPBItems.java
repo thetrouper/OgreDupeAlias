@@ -43,6 +43,7 @@ public class SPBItems {
                             }
                         }
                     snowball.setVelocity(vec.multiply(2));
+                    snowball.setShooter(p);
                     SoundPlayer shootSound = new SoundPlayer(p.getLocation(), Sound.ENTITY_ITEM_FRAME_REMOVE_ITEM,10,1);
                     shootSound.playWithin(30);
                 }

@@ -41,6 +41,8 @@ public class InteractionListener implements Listener {
             PotatoCannon.handlePotatoCannon(e);
             PlayerEventListener.handleEnderPearls(e);
             SPBItems.handleRifle(e);
+            LaserPointer.handleLaserPointer(e);
+            Pickler.handlePickler(e);
         }
         catch (Exception ignore) {}
     }
