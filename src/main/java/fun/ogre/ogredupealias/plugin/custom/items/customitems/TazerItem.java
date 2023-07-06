@@ -30,39 +30,45 @@ public class TazerItem extends CustomItem {
 
             Location loc = player.getEyeLocation();
             Vector vec = player.getLocation().getDirection().normalize();
-            Predicate<Entity> filter = (e) -> e != player && !e.isDead() && e instanceof LivingEntity;
             Location target = RaycastUtils.raycast(loc, vec, 64.0, point -> !point.getBlock().isPassable());
-            int maxSections = 10;
-            int delta = 5;
-            double maxDist = loc.distance(target);
-            double sectionDist = maxDist / maxSections;
-            Location prevLoc = loc.clone();
 
-            Predicate<Location> hitCondition = (point) -> {
-                Particle.DustOptions dust = new Particle.DustOptions(Color.AQUA, 0.7F);
-                point.getWorld().spawnParticle(Particle.REDSTONE, point, 1, 0, 0, 0, 0, dust);
-                return false;
-            };
-            Consumer<Entity> onHit = (entity) -> {
-                ((LivingEntity) entity).damage(6, entity); // let the entity kill themselves for max trolldge
-                entity.setFireTicks(100);
-                SoundPlayer hit = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
-                hit.playWithin(20);
-            };
-
-            for (int i = 0; i < maxSections - 1; i ++) {
-                prevLoc = RaycastUtils.raycast(prevLoc, vec, sectionDist, 0.2, hitCondition);
-                vec = randomizeVector(vec, delta);
-                SoundPlayer zap = new SoundPlayer(prevLoc, Sound.ENTITY_BEE_HURT, 1, 10);
-                zap.playWithin(20);
-                prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(onHit);
-            }
-            prevLoc = RaycastUtils.raycast(prevLoc, target, 0.2, hitCondition);
-            prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(onHit);
+            zap(loc, vec, target, entity -> entity == player);
         };
     }
 
-    private Vector randomizeVector(Vector vec, int delta) {
+    public static void zap(Location start, Vector startingDirection, Location end, Predicate<Entity> excluding) {
+        Predicate<Entity> filter = (e) -> !excluding.test(e) && !e.isDead() && e instanceof LivingEntity;
+        int maxSections = 10;
+        int delta = 5;
+        double maxDist = start.distance(end);
+        double sectionDist = maxDist / maxSections;
+        Location prevLoc = start.clone();
+        Vector vec = startingDirection;
+
+        Consumer<Entity> onHit = (entity) -> {
+            ((LivingEntity) entity).damage(6, entity); // let the entity kill themselves for max trolldge
+            entity.setFireTicks(100);
+            SoundPlayer hit = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
+            hit.playWithin(20);
+        };
+        Predicate<Location> hitCondition = (point) -> {
+            Particle.DustOptions dust = new Particle.DustOptions(Color.AQUA, 0.7F);
+            point.getWorld().spawnParticle(Particle.REDSTONE, point, 1, 0, 0, 0, 0, dust);
+            point.getWorld().getNearbyEntities(point, 2, 2, 2).stream().filter(filter).forEach(onHit);
+            return false;
+        };
+
+        for (int i = 0; i < maxSections - 1; i ++) {
+            prevLoc = RaycastUtils.raycast(prevLoc, vec, sectionDist, 0.2, hitCondition);
+            vec = randomizeVector(vec, delta);
+            SoundPlayer zap = new SoundPlayer(prevLoc, Sound.ENTITY_BEE_HURT, 1, 10);
+            zap.playWithin(20);
+        }
+        prevLoc = RaycastUtils.raycast(prevLoc, end, 0.3, hitCondition);
+        prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(onHit);
+    }
+
+    private static Vector randomizeVector(Vector vec, int delta) {
         return vec.clone().add(new Vector(Randomizer.rand(-delta, delta), Randomizer.rand(-delta, delta), Randomizer.rand(-delta, delta))).normalize();
     }
 }
