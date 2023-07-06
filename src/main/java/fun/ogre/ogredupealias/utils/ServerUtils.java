@@ -3,6 +3,7 @@ package fun.ogre.ogredupealias.utils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -57,5 +58,9 @@ public class ServerUtils {
                 action.accept(p);
             }
         });
+    }
+
+    public static boolean hasBlockBelow(Player p, Material type) {
+        return p.getLocation().clone().subtract(0, 1, 0).getBlock().getType() == type;
     }
 }
