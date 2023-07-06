@@ -64,6 +64,10 @@ public class GiveCustomCommand implements TabExecutor {
                     p.getInventory().addItem(ItemPresets.PICKLER);
                     p.sendMessage(Text.ofAll("&bGiven you a Pickler"));
                 }
+                case "Tazer" -> {
+                    p.getInventory().addItem(ItemPresets.TAZER);
+                    p.sendMessage(Text.ofAll("&bGiven you a Tazer"));
+                }
             }
         }
         catch (Exception ex) {
@@ -86,7 +90,8 @@ public class GiveCustomCommand implements TabExecutor {
                         "VoidCharm",
                         "Spleefer",
                         "PotatoCannon",
-                        "LaserPointer"
+                        "LaserPointer",
+                        "Tazer"
                 })
                 .build();
     }

@@ -4,6 +4,7 @@ import fun.ogre.ogredupealias.commands.commands.*;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.events.*;
 import fun.ogre.ogredupealias.plugin.custom.forging.CraftingKeys;
+import fun.ogre.ogredupealias.plugin.custom.items.CustomItems;
 import fun.ogre.ogredupealias.plugin.funitems.AdminUtility;
 import fun.ogre.ogredupealias.plugin.funitems.Pickler;
 import fun.ogre.ogredupealias.plugin.funitems.PotatoCannon;
@@ -27,6 +28,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         instance = this;
         this.init();
         this.initConfig();
+        CustomItems.init();
         CraftingKeys.initRecipes();
     }
 
@@ -51,6 +53,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new AdminUtility(), this);
         pm.registerEvents(new Pickler(), this);
         pm.registerEvents(new SPBEventListener(), this);
+        // event for custom items
+        pm.registerEvents(new CustomItems(), this);
 
         // Commands
         getCommand("forcefield").setExecutor(new ForceFieldCommand());

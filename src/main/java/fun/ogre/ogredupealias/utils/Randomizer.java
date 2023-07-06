@@ -50,8 +50,7 @@ public class Randomizer<T> {
      * @return random
      */
     public static int rand(int max) {
-        if (max <= 0) throw new IllegalArgumentException("max cannot be less than 1!");
-        return (int) Math.ceil(Math.random() * max);
+        return (int)(Math.random() * max);
     }
 
     /**
@@ -61,8 +60,7 @@ public class Randomizer<T> {
      * @return random
      */
     public static int rand(int min, int max) {
-        if (max <= 0 || min <= 0) throw new IllegalArgumentException("max or min cannot be less than 1!");
         if (max <= min) throw new IllegalArgumentException("max cannot be less than or equal to min!");
-        return min + (int) Math.floor(Math.random() * (max - min + 1));
+        return min + (int)(Math.random() * (max - min + 1));
     }
 }

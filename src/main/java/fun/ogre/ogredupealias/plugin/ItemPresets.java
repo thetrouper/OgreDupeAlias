@@ -153,4 +153,14 @@ public abstract class ItemPresets {
             .lore(Text.color("&2▪ &aRight-Click:&7 Pickle-ify Someone"))
             .customModelData(1111)
             .build();
+
+    public static ItemStack TAZER = ItemBuilder.create()
+            .material(Material.NETHERITE_AXE)
+            .name(Text.color("&7{&b&lTazer&7}"))
+            .unbreakable(true)
+            .enchant(Enchantment.LURE, 1)
+            .flag(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE)
+            .customModelData(1111)
+            .build();
+
 }

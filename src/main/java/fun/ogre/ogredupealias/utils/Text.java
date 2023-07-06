@@ -47,6 +47,15 @@ public class Text {
         return builder("");
     }
 
+    public static String removeColors(String msg) {
+        String s = msg;
+        while (s.length() >= 2 && s.contains("§")) {
+            int index = s.indexOf("§");
+            s = s.replaceAll(s.substring(index, index + 2), "");
+        }
+        return s;
+    }
+
     public static class TextBuilder {
 
         private String s;
