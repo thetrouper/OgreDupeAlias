@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class TazerItem extends CustomItem {
@@ -30,12 +31,7 @@ public class TazerItem extends CustomItem {
             Location loc = player.getEyeLocation();
             Vector vec = player.getLocation().getDirection().normalize();
             Predicate<Entity> filter = (e) -> e != player && !e.isDead() && e instanceof LivingEntity;
-
-            Location target = RaycastUtils.raycast(loc, vec, 64.0, point -> {
-                boolean hitBlock = !point.getBlock().isPassable();
-                boolean hitEntity = point.getWorld().getNearbyEntities(point, 2, 2, 2).stream().anyMatch(filter);
-                return hitBlock || hitEntity;
-            });
+            Location target = RaycastUtils.raycast(loc, vec, 64.0, point -> !point.getBlock().isPassable());
             int maxSections = 10;
             int delta = 5;
             double maxDist = loc.distance(target);
@@ -47,21 +43,22 @@ public class TazerItem extends CustomItem {
                 point.getWorld().spawnParticle(Particle.REDSTONE, point, 1, 0, 0, 0, 0, dust);
                 return false;
             };
+            Consumer<Entity> onHit = (entity) -> {
+                ((LivingEntity) entity).damage(6, entity); // let the entity kill themselves for max trolldge
+                entity.setFireTicks(100);
+                SoundPlayer hit = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
+                hit.playWithin(20);
+            };
 
             for (int i = 0; i < maxSections - 1; i ++) {
                 prevLoc = RaycastUtils.raycast(prevLoc, vec, sectionDist, 0.2, hitCondition);
                 vec = randomizeVector(vec, delta);
-
                 SoundPlayer zap = new SoundPlayer(prevLoc, Sound.ENTITY_BEE_HURT, 1, 10);
                 zap.playWithin(20);
-                prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(entity -> {
-                    ((LivingEntity) entity).damage(6, player);
-                    entity.setFireTicks(100);
-                    SoundPlayer hit = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
-                    hit.playWithin(20);
-                });
+                prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(onHit);
             }
-            RaycastUtils.raycast(prevLoc, target, 0.2, hitCondition);
+            prevLoc = RaycastUtils.raycast(prevLoc, target, 0.2, hitCondition);
+            prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(onHit);
         };
     }
 
