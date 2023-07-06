@@ -10,6 +10,7 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
@@ -28,10 +29,11 @@ public class TazerItem extends CustomItem {
 
             Location loc = player.getEyeLocation();
             Vector vec = player.getLocation().getDirection().normalize();
+            Predicate<Entity> filter = (e) -> e != player && !e.isDead() && e instanceof LivingEntity;
 
             Location target = RaycastUtils.raycast(loc, vec, 64.0, point -> {
                 boolean hitBlock = !point.getBlock().isPassable();
-                boolean hitEntity = point.getWorld().getNearbyEntities(point, 2, 2, 2).stream().anyMatch(e -> e != player && !e.isDead() && e instanceof LivingEntity);
+                boolean hitEntity = point.getWorld().getNearbyEntities(point, 2, 2, 2).stream().anyMatch(filter);
                 return hitBlock || hitEntity;
             });
             int maxSections = 10;
@@ -43,22 +45,21 @@ public class TazerItem extends CustomItem {
             Predicate<Location> hitCondition = (point) -> {
                 Particle.DustOptions dust = new Particle.DustOptions(Color.AQUA, 0.7F);
                 point.getWorld().spawnParticle(Particle.REDSTONE, point, 1, 0, 0, 0, 0, dust);
-                point.getWorld().getNearbyEntities(point, 2, 2, 2).stream()
-                        .filter(e -> e != player && !e.isDead() && e instanceof LivingEntity)
-                        .forEach(entity -> {
-                            ((LivingEntity) entity).damage(6, player);
-                            entity.setFireTicks(100);
-                            SoundPlayer zap = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
-                            zap.playWithin(20);
-                        });
                 return false;
             };
 
             for (int i = 0; i < maxSections - 1; i ++) {
                 prevLoc = RaycastUtils.raycast(prevLoc, vec, sectionDist, 0.2, hitCondition);
                 vec = randomizeVector(vec, delta);
+
                 SoundPlayer zap = new SoundPlayer(prevLoc, Sound.ENTITY_BEE_HURT, 1, 10);
                 zap.playWithin(20);
+                prevLoc.getWorld().getNearbyEntities(prevLoc, 2, 2, 2).stream().filter(filter).forEach(entity -> {
+                    ((LivingEntity) entity).damage(6, player);
+                    entity.setFireTicks(100);
+                    SoundPlayer hit = new SoundPlayer(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 1, 1.5F);
+                    hit.playWithin(20);
+                });
             }
             RaycastUtils.raycast(prevLoc, target, 0.2, hitCondition);
         };
