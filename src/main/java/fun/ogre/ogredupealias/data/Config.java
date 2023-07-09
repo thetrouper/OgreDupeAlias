@@ -37,6 +37,10 @@ public abstract class Config {
         return sections;
     }
 
+    public static <T> T getOrDef(T val, T def) {
+        return val != null ? val : def;
+    }
+
     public static class Plugin {
         private static final String path = "plugin.";
         public static String prefix() {

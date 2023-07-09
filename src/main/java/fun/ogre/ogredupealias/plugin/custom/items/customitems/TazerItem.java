@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 public class TazerItem extends CustomItem {
 
     public TazerItem() {
-        super(ItemPresets.TAZER);
+        super("tazer", ItemPresets.TAZER);
     }
 
     @Override

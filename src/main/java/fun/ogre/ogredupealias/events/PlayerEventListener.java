@@ -1,10 +1,9 @@
 package fun.ogre.ogredupealias.events;
 
 import fun.ogre.ogredupealias.data.Config;
-import fun.ogre.ogredupealias.utils.ItemUtils;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
+import fun.ogre.ogredupealias.utils.ItemUtils;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

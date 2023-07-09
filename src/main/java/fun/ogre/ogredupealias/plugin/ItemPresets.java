@@ -163,4 +163,11 @@ public abstract class ItemPresets {
             .customModelData(1111)
             .build();
 
+    public static ItemStack LAZER = ItemBuilder.create()
+            .material(Material.REDSTONE_TORCH)
+            .name("Lazer Pointer")
+            .lore(Text.color("&7- A funny gadget!"))
+            .customModelData(1111)
+            .build();
+
 }

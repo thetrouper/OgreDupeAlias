@@ -5,9 +5,11 @@ import org.bukkit.inventory.ItemStack;
 public abstract class CustomItem {
 
     private final ItemStack item;
+    private final String name;
 
-    public CustomItem(ItemStack item) {
+    public CustomItem(String name, ItemStack item) {
         this.item = item;
+        this.name = name;
     }
 
     public abstract CustomItemInteractionCallback getCallback();
@@ -23,5 +25,9 @@ public abstract class CustomItem {
 
     public ItemStack getItem() {
         return item;
+    }
+
+    public String getName() {
+        return name;
     }
 }

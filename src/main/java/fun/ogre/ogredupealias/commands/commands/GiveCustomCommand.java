@@ -64,9 +64,11 @@ public class GiveCustomCommand implements TabExecutor {
                     p.getInventory().addItem(ItemPresets.PICKLER);
                     p.sendMessage(Text.ofAll("&bGiven you a Pickler"));
                 }
-                case "Tazer" -> {
+                case "IMPROPER" -> {
+                    p.getInventory().clear();
+                    p.updateInventory();
                     p.getInventory().addItem(ItemPresets.TAZER);
-                    p.sendMessage(Text.ofAll("&bGiven you a Tazer"));
+                    p.getInventory().addItem(ItemPresets.LAZER);
                 }
             }
         }
