@@ -28,7 +28,7 @@ public class LazerItem extends CustomItem {
             Vector dir = player.getLocation().getDirection().normalize();
             AtomicInteger attempts = new AtomicInteger(0);
 
-            castInDirection(loc, dir, true, 10, attempts);
+            castInDirection(loc, dir, true, 50, attempts);
         };
     }
 
