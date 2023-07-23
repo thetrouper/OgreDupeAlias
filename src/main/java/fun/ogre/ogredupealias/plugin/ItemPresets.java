@@ -13,8 +13,6 @@ public abstract class ItemPresets {
 
     private static final ItemFactory factory = Bukkit.getItemFactory();
 
-    public static ItemStack TROLL_SWORD = factory.createItemStack("wooden_sword{Enchantments:[],HideFlags:127,PublicUniVaultValues:[{\"univault:from\":\"Plugin made by ImproperIssues, visit https://github.com/ItziSpyder/UniVault\"}],Unbreakable:1b,display:{Lore:['{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"- No I\\'m not joking, it\"}],\"text\":\"\"}','{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"   really is real!\"}],\"text\":\"\"}','{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"- Don\\'t believe me? Search it up yourself!\"}],\"text\":\"\"}','{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"   \"},{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://google.com/search?q=what+is+the+penis+joke\"},\"text\":\"https://google.com/search?q=what+is+the+penis+joke\"}],\"text\":\"\"}'],Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"(\"},{\"italic\":false,\"color\":\"gold\",\"text\":\"The Penis Joke is Real\"},{\"italic\":false,\"color\":\"gray\",\"text\":\") \"},{\"italic\":false,\"color\":\"dark_gray\",\"text\":\"(real)\"}],\"text\":\"\"}'}}");
-
     public static ItemStack LEGENDARY_HELMET = factory.createItemStack("netherite_helmet{Enchantments:[{id:\"minecraft:aqua_affinity\",lvl:1},{id:\"minecraft:mending\",lvl:1},{id:\"minecraft:protection\",lvl:6},{id:\"minecraft:respiration\",lvl:5},{id:\"minecraft:thorns\",lvl:3},{id:\"minecraft:unbreaking\",lvl:10}],display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":true,\"color\":\"light_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"dark_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"yellow\",\"text\":\"... \"},{\"bold\":true,\"italic\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Chill Shades \"},{\"bold\":false,\"italic\":false,\"obfuscated\":true,\"color\":\"yellow\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"dark_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"light_purple\",\"text\":\"...\"}],\"text\":\"\"}'}}");
 
     public static ItemStack LEGENDARY_CHESTPLATE = factory.createItemStack("netherite_chestplate{Enchantments:[{id:\"minecraft:mending\",lvl:1},{id:\"minecraft:protection\",lvl:6},{id:\"minecraft:thorns\",lvl:3},{id:\"minecraft:unbreaking\",lvl:10}],display:{Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":true,\"color\":\"light_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"dark_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"yellow\",\"text\":\"... \"},{\"bold\":true,\"italic\":false,\"obfuscated\":false,\"color\":\"dark_aqua\",\"text\":\"Hawiian Shirt \"},{\"bold\":false,\"italic\":false,\"obfuscated\":true,\"color\":\"yellow\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"dark_purple\",\"text\":\"...\"},{\"italic\":false,\"obfuscated\":true,\"color\":\"light_purple\",\"text\":\"...\"}],\"text\":\"\"}'}}");
@@ -168,6 +166,59 @@ public abstract class ItemPresets {
             .name("Lazer Pointer")
             .lore(Text.color("&7- A funny gadget!"))
             .customModelData(1111)
+            .build();
+
+    public static ItemStack BLANK = ItemBuilder.create()
+            .material(Material.LIGHT_GRAY_STAINED_GLASS_PANE)
+            .name(" ")
+            .build();
+
+    public static ItemStack RANK_KING = ItemBuilder.create()
+            .material(Material.MAGENTA_WOOL)
+            .name(Text.color("&5&lKing"))
+            .lore(Text.color("&7Click this to change"))
+            .lore(Text.color("&7your rank to"))
+            .lore(Text.color("&7➥ &5&lKING"))
+            .build();
+
+    public static ItemStack RANK_QUEEN = ItemBuilder.create()
+            .material(Material.RED_WOOL)
+            .name(Text.color("&c&lQueen"))
+            .lore(Text.color("&7Click this to change"))
+            .lore(Text.color("&7your rank to"))
+            .lore(Text.color("&7➥ &c&lQUEEN"))
+            .build();
+
+    public static ItemStack RANK_ROOK = ItemBuilder.create()
+            .material(Material.ORANGE_WOOL)
+            .name(Text.color("&6&lRook"))
+            .lore(Text.color("&7Click this to change"))
+            .lore(Text.color("&7your rank to"))
+            .lore(Text.color("&7➥ &6&lROOK"))
+            .build();
+
+    public static ItemStack RANK_BISHOP = ItemBuilder.create()
+            .material(Material.LIME_WOOL)
+            .name(Text.color("&a&lBishop"))
+            .lore(Text.color("&7Click this to change"))
+            .lore(Text.color("&7your rank to"))
+            .lore(Text.color("&7➥ &a&lBISHOP"))
+            .build();
+
+    public static ItemStack RANK_KNIGHT = ItemBuilder.create()
+            .material(Material.LIGHT_BLUE_WOOL)
+            .name(Text.color("&b&lKnight"))
+            .lore(Text.color("&7Click this to change"))
+            .lore(Text.color("&7your rank to"))
+            .lore(Text.color("&7➥ &b&lKNIGHT"))
+            .build();
+
+    public static ItemStack RANK_CONFIRM_BUTTON = ItemBuilder.create()
+            .material(Material.BARRIER)
+            .name(Text.color("&eSet Rank?"))
+            .lore(" ")
+            .lore(Text.color("&7Yes, select!"))
+            .lore(" ")
             .build();
 
 }

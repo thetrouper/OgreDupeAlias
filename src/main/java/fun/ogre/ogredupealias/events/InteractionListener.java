@@ -15,7 +15,7 @@ public class InteractionListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         try {
-            e.getPlayer().openInventory(CustomGuis.EXAMPLE.getInventory());
+            e.getPlayer().openInventory(CustomGuis.RANKS.getInventory());
 
             this.processTable(e);
             NetSkyBlade.handleNetskyBlade(e);

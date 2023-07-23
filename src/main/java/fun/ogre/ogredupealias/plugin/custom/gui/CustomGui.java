@@ -3,6 +3,7 @@ package fun.ogre.ogredupealias.plugin.custom.gui;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -69,9 +70,11 @@ public class CustomGui {
     }
 
     public void onInventoryClick(InventoryClickEvent event) {
-        mainAction.onClick(event);
-        if (slotActions.containsKey(event.getSlot())) {
-            slotActions.get(event.getSlot()).onClick(event);
+        if (!event.isCancelled() && event.getClickedInventory() != null && event.getClickedInventory().getType() != InventoryType.PLAYER) {
+            mainAction.onClick(event);
+            if (slotActions.containsKey(event.getSlot())) {
+                slotActions.get(event.getSlot()).onClick(event);
+            }
         }
     }
 
