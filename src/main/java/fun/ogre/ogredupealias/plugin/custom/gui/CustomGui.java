@@ -19,14 +19,16 @@ public class CustomGui {
     private final CreateAction createAction;
     private final CloseAction closeAction;
     private final String title;
+    private final int size;
 
-    public CustomGui(String title, InvAction mainAction, Map<Integer, InvAction> slotActions, Map<Integer, ItemStack> slotDisplays, CreateAction createAction, CloseAction closeAction) {
+    public CustomGui(String title, int size, InvAction mainAction, Map<Integer, InvAction> slotActions, Map<Integer, ItemStack> slotDisplays, CreateAction createAction, CloseAction closeAction) {
         this.slotActions = slotActions;
         this.slotDisplays = slotDisplays;
         this.mainAction = mainAction;
         this.createAction = createAction;
         this.closeAction = closeAction;
         this.title = title;
+        this.size = size;
     }
 
     public static CustomGui register(CustomGui gui) {
@@ -51,11 +53,16 @@ public class CustomGui {
     }
 
     public Inventory getInventory() {
-        int max = slotActions.keySet().stream().sorted(Comparator.comparing(i -> (int)i).reversed()).toList().get(0);
-        int add = max % 9 == 0 ? 0 : 1;
-        int value = (int)(Math.floor(max / 9.0) + add) * 9;
+        int size = this.size;
 
-        Inventory inv = Bukkit.createInventory(null, value, title);
+        if (size % 9 != 0) {
+            int max = slotActions.keySet().stream().sorted(Comparator.comparing(i -> (int)i).reversed()).toList().get(0);
+            int add = max % 9 == 0 ? 0 : 1;
+            size = (int)(Math.floor(max / 9.0) + add) * 9;
+        }
+
+        Inventory inv = Bukkit.createInventory(null, size, title);
+        createAction.onCreate(inv);
         slotDisplays.forEach(inv::setItem);
 
         return inv;
@@ -92,6 +99,10 @@ public class CustomGui {
         return closeAction;
     }
 
+    public int getInvSize() {
+        return size;
+    }
+
 
 
     public static GuiBuilder create() {
@@ -105,9 +116,11 @@ public class CustomGui {
         private final Map<Integer, InvAction> slotActions;
         private final Map<Integer, ItemStack> slotDisplay;
         private String title;
+        private int size;
 
         public GuiBuilder() {
             this.title = "Untitled Inventory";
+            this.size = -1;
             this.mainAction = event -> {};
             this.createAction = inv -> {};
             this.closeAction = event -> {};
@@ -117,6 +130,11 @@ public class CustomGui {
 
         public GuiBuilder title(String text) {
             title = text;
+            return this;
+        }
+
+        public GuiBuilder size(int size) {
+            this.size = size;
             return this;
         }
 
@@ -147,7 +165,7 @@ public class CustomGui {
         }
 
         public CustomGui build() {
-            CustomGui gui = new CustomGui(title, mainAction, slotActions, slotDisplay, createAction, closeAction);
+            CustomGui gui = new CustomGui(title, size, mainAction, slotActions, slotDisplay, createAction, closeAction);
             CustomGui.register(gui);
             return gui;
         }

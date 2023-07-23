@@ -1,36 +1,22 @@
 package fun.ogre.ogredupealias.events;
 
-import fun.ogre.ogredupealias.OgreDupeAlias;
 import fun.ogre.ogredupealias.data.PlacedStructures;
 import fun.ogre.ogredupealias.plugin.InventoryPresets;
-import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.plugin.RecipientList;
+import fun.ogre.ogredupealias.plugin.custom.gui.CustomGuis;
 import fun.ogre.ogredupealias.plugin.funitems.*;
-import fun.ogre.ogredupealias.utils.*;
-import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
-
-import java.beans.MethodDescriptor;
-import java.beans.beancontext.BeanContext;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class InteractionListener implements Listener {
 
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         try {
+            e.getPlayer().openInventory(CustomGuis.EXAMPLE.getInventory());
+
             this.processTable(e);
             NetSkyBlade.handleNetskyBlade(e);
             Defender.handleDefender(e);
