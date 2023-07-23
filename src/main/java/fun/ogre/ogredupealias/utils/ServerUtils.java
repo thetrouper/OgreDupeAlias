@@ -63,4 +63,8 @@ public class ServerUtils {
     public static boolean hasBlockBelow(Player p, Material type) {
         return p.getLocation().clone().subtract(0, 1, 0).getBlock().getType() == type;
     }
+
+    public static boolean dispatch(String command) {
+        return Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+    }
 }

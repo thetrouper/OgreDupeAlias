@@ -1,6 +1,7 @@
 package fun.ogre.ogredupealias.events;
 
 import fun.ogre.ogredupealias.plugin.custom.forging.CustomTable;
+import fun.ogre.ogredupealias.plugin.custom.gui.CustomGui;
 import fun.ogre.ogredupealias.utils.Text;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class InventoryActionListener implements Listener {
     public void onClick(InventoryClickEvent e) {
         try {
             this.handleForgeClick(e);
+            CustomGui.handleRegistriesClick(e);
         }
         catch (Exception ignore) {}
     }
@@ -22,6 +24,7 @@ public class InventoryActionListener implements Listener {
     public void onClose(InventoryCloseEvent e) {
         try {
             this.handleForgeClose(e);
+            CustomGui.handleRegistriesClose(e);
         }
         catch (Exception ignore) {}
     }
