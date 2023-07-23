@@ -29,7 +29,7 @@ public class ChatConstraints {
     }
 
     public boolean passAllChecks() {
-        return passChatMuted() && passRepeat() && passSwear() && passUnicode() && passSpam();
+        return passChatMuted() && passUnicode() ;
     }
 
     public boolean passChatMuted() {

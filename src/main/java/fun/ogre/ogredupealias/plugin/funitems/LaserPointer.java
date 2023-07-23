@@ -27,7 +27,11 @@ public class LaserPointer {
         switch (a) {
             case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> {
                 // Full beam
-                RaycastUtils.raycast(start,rot,30,0.1,(point) -> {
+                Location end = RaycastUtils.raycast(start,rot,60,0.5,(point) -> {
+                    return !point.getBlock().isPassable();
+                });
+                Vector rightVec = new Vector(rot.getX(), rot.getY(), rot.getZ());
+                RaycastUtils.raycast(start.clone().add(0,1,0),end,0.1,(point) -> {
                     Particle.DustOptions dust = new Particle.DustOptions(Color.LIME, 0.5F);
                     point.getWorld().spawnParticle(Particle.REDSTONE,point,1,0,0,0,0,dust);
                    return !point.getBlock().getType().equals(Material.AIR);

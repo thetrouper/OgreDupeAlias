@@ -25,7 +25,6 @@ public class SPBEventListener implements Listener {
             Projectile proj = e.getEntity();
             if (proj instanceof Snowball && proj.getShooter() instanceof Player shooter) {
                 Snowball snowball = (Snowball) proj;
-                shooter.sendMessage("Hit a block");
                 if (snowball.getItem().getType() == Material.BLUE_DYE || snowball.getItem().getType() == Material.BLUE_DYE) {
                     shooter.sendMessage("Passed dye check");
                     if (!e.getHitBlock().getType().equals(Material.COMMAND_BLOCK) && !e.getHitBlock().getType().equals(Material.CHAIN_COMMAND_BLOCK) && !e.getHitBlock().getType().equals(Material.REPEATING_COMMAND_BLOCK)) {

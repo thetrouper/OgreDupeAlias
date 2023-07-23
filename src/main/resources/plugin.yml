@@ -17,9 +17,6 @@ permissions:
   oda.commands.staffchat:
     description: Access to staffchat.
     default: op
-  oda.commands.socialspy:
-    description: Access to socialspy.
-    default: op
   oda.commands.commandspy:
     description: Access to commandspy.
     default: op
@@ -109,17 +106,6 @@ commands:
     aliases:
       - ipearlrepair
       - irestock
-  message:
-    description: Private message a player
-    usage: /message <player> [<message>]
-    aliases:
-      - msg
-      - pm
-      - dm
-      - tell
-      - whisper
-      - w
-      - message
   attackcooldown:
     description: Attack cooldown bypass for entities.
     usage: /attackcooldown

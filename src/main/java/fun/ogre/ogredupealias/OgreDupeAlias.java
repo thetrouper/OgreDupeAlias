@@ -64,16 +64,12 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("mutechat").setTabCompleter(new MuteChatCommand());
         getCommand("staffchat").setExecutor(new StaffChatCommand());
         getCommand("staffchat").setTabCompleter(new StaffChatCommand());
-        getCommand("socialspy").setExecutor(new SocialSpyCommand());
-        getCommand("socialspy").setTabCompleter(new SocialSpyCommand());
         getCommand("commandspy").setExecutor(new CommandSpyCommand());
         getCommand("commandspy").setTabCompleter(new CommandSpyCommand());
         getCommand("recipespy").setExecutor(new RecipeSpyCommand());
         getCommand("recipespy").setTabCompleter(new RecipeSpyCommand());
         getCommand("irepair").setExecutor(new IRepairCommand());
         getCommand("irepair").setTabCompleter(new IRepairCommand());
-        getCommand("message").setExecutor(new MessageCommand());
-        getCommand("message").setTabCompleter(new MessageCommand());
         getCommand("attackcooldown").setExecutor(new AttackCooldownCommand());
         getCommand("attackcooldown").setTabCompleter(new AttackCooldownCommand());
         getCommand("givecustom").setExecutor(new GiveCustomCommand());
