@@ -39,6 +39,10 @@ public class CustomGui {
         return gui;
     }
 
+    public static Map<String, CustomGui> registries() {
+        return new HashMap<>(registry);
+    }
+
     public static void handleRegistriesClick(InventoryClickEvent event) {
         String title = event.getView().getTitle();
         if (registry.containsKey(title)) {
