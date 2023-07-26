@@ -36,7 +36,7 @@ public class RailgunItem extends CustomItem {
                 }).isEmpty();
                 return hitBlock || hitEntity;
             });
-            Particle.DustOptions dust = new Particle.DustOptions(Color.AQUA, 10F);
+            Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(2, 255, 255), 10F);
             world.spawnParticle(Particle.REDSTONE, end, 30, 0, 0, 0, 1, dust);
 
             this.beam(loc, end, eye, world, player);
@@ -46,7 +46,7 @@ public class RailgunItem extends CustomItem {
 
     private void flash(Location loc, Location end, Location eye, World world, Player player) {
         float dist = (float)loc.distance(end);
-        float rad = 0.02F;
+        float rad = 0.05F;
         AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
         Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
 
@@ -57,7 +57,7 @@ public class RailgunItem extends CustomItem {
             entity.setBrightness(new Display.Brightness(15, 15));
             entity.setViewRange(dist);
             entity.setRotation(eye.getYaw(), eye.getPitch());
-            entity.setBlock(Material.WHITE_STAINED_GLASS.createBlockData());
+            entity.setBlock(Material.LIGHT_BLUE_STAINED_GLASS.createBlockData());
             entity.setTransformation(transformation);
 
             Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
@@ -75,7 +75,7 @@ public class RailgunItem extends CustomItem {
 
     private void beam(Location loc, Location end, Location eye, World world, Player player) {
         float dist = (float)loc.distance(end);
-        float rad = 0.02F;
+        float rad = 0.05F;
         AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
         Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
 
@@ -89,6 +89,8 @@ public class RailgunItem extends CustomItem {
             entity.setRotation(eye.getYaw(), eye.getPitch());
             entity.setBlock(Material.DIAMOND_BLOCK.createBlockData());
             entity.setTransformation(transformation);
+            entity.setGlowing(true);
+            entity.setGlowColorOverride(Color.fromRGB(2, 255, 255));
             sound.playWithin(500);
 
             Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
@@ -107,6 +109,7 @@ public class RailgunItem extends CustomItem {
             Vector3f scale = new Vector3f(rad, rad, 0.0F);
             Transformation transformation = new Transformation(translation, angle, scale, angle);
 
+            world.spawnParticle(Particle.EXPLOSION_LARGE, end, 1, 2, 2, 2, 0);
             world.createExplosion(end, 3, false, false, player);
             beam.setInterpolationDelay(0);
             beam.setInterpolationDuration(20);
