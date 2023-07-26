@@ -6,10 +6,7 @@ import fun.ogre.ogredupealias.plugin.custom.items.CustomItemInteractionCallback;
 import fun.ogre.ogredupealias.utils.RaycastUtils;
 import fun.ogre.ogredupealias.utils.SoundPlayer;
 import org.bukkit.*;
-import org.bukkit.entity.BlockDisplay;
-import org.bukkit.entity.Display;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.util.Transformation;
 import org.joml.AxisAngle4f;
 import org.joml.Vector3f;
@@ -46,29 +43,31 @@ public class RailgunItem extends CustomItem {
 
     private void flash(Location loc, Location end, Location eye, World world, Player player) {
         float dist = (float)loc.distance(end);
-        float rad = 0.05F;
+        float diameter = 1F;
+        float radius = diameter / 2F;
         AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
-        Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
+        Vector3f translation = new Vector3f(0F, 0F, 0F);
 
         BlockDisplay beam = world.spawn(eye, BlockDisplay.class, entity -> {
-            Vector3f scale = new Vector3f(rad, 0.5F, dist);
+            Vector3f scale = new Vector3f(0F, 0.5F, dist);
             Transformation transformation = new Transformation(translation, angle, scale, angle);
 
             entity.setBrightness(new Display.Brightness(15, 15));
             entity.setViewRange(dist);
             entity.setRotation(eye.getYaw(), eye.getPitch());
-            entity.setBlock(Material.LIGHT_BLUE_STAINED_GLASS.createBlockData());
+            entity.setBlock(Material.WHITE_STAINED_GLASS.createBlockData());
             entity.setTransformation(transformation);
 
-            Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
+            Bukkit.getScheduler().runTaskLater(instance, entity::remove, 10);
         });
 
         Bukkit.getScheduler().runTaskLater(instance, () -> {
-            Vector3f scale = new Vector3f(rad, 0F, dist);
-            Transformation transformation = new Transformation(translation, angle, scale, angle);
+            Vector3f scale = new Vector3f(diameter, diameter, dist);
+            Vector3f trans = new Vector3f(-radius);
+            Transformation transformation = new Transformation(trans, angle, scale, angle);
 
             beam.setInterpolationDelay(0);
-            beam.setInterpolationDuration(20);
+            beam.setInterpolationDuration(5);
             beam.setTransformation(transformation);
         }, 5);
     }
@@ -109,11 +108,49 @@ public class RailgunItem extends CustomItem {
             Vector3f scale = new Vector3f(rad, rad, 0.0F);
             Transformation transformation = new Transformation(translation, angle, scale, angle);
 
-            world.spawnParticle(Particle.EXPLOSION_LARGE, end, 1, 2, 2, 2, 0);
-            world.createExplosion(end, 3, false, false, player);
+            this.explosion(end, player);
             beam.setInterpolationDelay(0);
             beam.setInterpolationDuration(20);
             beam.setTransformation(transformation);
-        }, 40);
+        }, 20);
+    }
+
+    private void explosion(Location loc, Entity source) {
+        World world = loc.getWorld();
+        AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
+        Vector3f translate = new Vector3f(-0.5F, -0.5F, -0.5F);
+        Vector3f scale = new Vector3f(0F, 0F, 0F);
+        Transformation transformation = new Transformation(translate, angle, scale, angle);
+
+        BlockDisplay ball = world.spawn(loc, BlockDisplay.class, entity -> {
+            entity.setTransformation(transformation);
+            entity.setBlock(Material.WHITE_CONCRETE.createBlockData());
+            entity.setViewRange(1000F);
+            Bukkit.getScheduler().runTaskLater(instance, entity::remove, 30);
+        });
+
+        Bukkit.getScheduler().runTaskLater(instance, task -> {
+            float diameter = 5F;
+            float radius = diameter / 2.0F;
+            Vector3f enlarge = new Vector3f(diameter, diameter, diameter);
+            Vector3f enlargeTransition = new Vector3f(-radius, -radius, -radius);
+            Transformation rescale = new Transformation(enlargeTransition, angle, enlarge, angle);
+
+            ball.setInterpolationDelay(0);
+            ball.setInterpolationDuration(5);
+            ball.setTransformation(rescale);
+
+            world.spawnParticle(Particle.EXPLOSION_LARGE, loc, 1, 2, 2, 2, 0);
+            world.createExplosion(loc, 3, false, false, source);
+        }, 5);
+
+        Bukkit.getScheduler().runTaskLater(instance, task -> {
+            ball.setInterpolationDelay(0);
+            ball.setInterpolationDuration(5);
+            ball.setTransformation(transformation);
+
+            world.spawnParticle(Particle.EXPLOSION_LARGE, loc, 1, 2, 2, 2, 0);
+            world.createExplosion(loc, 3, false, false, source);
+        }, 15);
     }
 }
