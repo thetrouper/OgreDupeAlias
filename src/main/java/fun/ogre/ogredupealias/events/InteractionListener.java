@@ -14,7 +14,6 @@ public class InteractionListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         try {
-
             this.processTable(e);
             NetSkyBlade.handleNetskyBlade(e);
             Defender.handleDefender(e);

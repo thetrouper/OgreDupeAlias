@@ -4,18 +4,12 @@ import fun.ogre.ogredupealias.commands.CmdExHandler;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.ImageUtils;
 import fun.ogre.ogredupealias.utils.Text;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,23 +1,19 @@
 package fun.ogre.ogredupealias.events;
 
 import fun.ogre.ogredupealias.OgreDupeAlias;
-import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
 import fun.ogre.ogredupealias.utils.ItemUtils;
-import fun.ogre.ogredupealias.utils.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import java.util.Objects;
 

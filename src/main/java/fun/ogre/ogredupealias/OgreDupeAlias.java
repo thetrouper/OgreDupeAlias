@@ -74,6 +74,8 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("attackcooldown").setTabCompleter(new AttackCooldownCommand());
         getCommand("givecustom").setExecutor(new GiveCustomCommand());
         getCommand("givecustom").setTabCompleter(new GiveCustomCommand());
+        getCommand("customitem").setExecutor(new CustomItemCommand());
+        getCommand("customitem").setTabCompleter(new CustomItemCommand());
         getCommand("changerank").setExecutor(new ChangeRankCommand());
         getCommand("changerank").setTabCompleter(new ChangeRankCommand());
         getCommand("showdonation").setExecutor(new ShowDonationCommand());

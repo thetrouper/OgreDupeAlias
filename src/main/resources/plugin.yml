@@ -78,6 +78,10 @@ commands:
     permission: oda.command.givecustom
     aliases:
       - givec
+  customitem:
+    description: Gives custom items
+    usage: /customitem <customitem>
+    permission: oda.command.givecustom
   config:
     description: Config management
     usage: /config [get|set] <path> <datatype> <value>

@@ -1,7 +1,6 @@
 package fun.ogre.ogredupealias.commands.commands;
 
 import fun.ogre.ogredupealias.commands.CmdExHandler;
-import fun.ogre.ogredupealias.plugin.custom.gui.CustomGUIs.RankChangeGUI;
 import fun.ogre.ogredupealias.plugin.custom.gui.CustomGUIs.StoreGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

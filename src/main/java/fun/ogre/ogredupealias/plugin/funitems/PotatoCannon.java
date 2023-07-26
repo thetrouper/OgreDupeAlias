@@ -5,8 +5,6 @@ import fun.ogre.ogredupealias.utils.ItemUtils;
 import fun.ogre.ogredupealias.utils.RaycastUtils;
 import fun.ogre.ogredupealias.utils.SoundPlayer;
 import fun.ogre.ogredupealias.utils.Text;
-import net.md_5.bungee.api.ChatMessageType;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -16,11 +14,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class PotatoCannon implements Listener {

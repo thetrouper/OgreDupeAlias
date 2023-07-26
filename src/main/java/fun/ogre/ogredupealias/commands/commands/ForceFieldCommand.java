@@ -2,8 +2,6 @@ package fun.ogre.ogredupealias.commands.commands;
 
 import fun.ogre.ogredupealias.OgreDupeAlias;
 import fun.ogre.ogredupealias.commands.CmdExHandler;
-import fun.ogre.ogredupealias.events.EntityDamageListener;
-import fun.ogre.ogredupealias.events.InteractionListener;
 import fun.ogre.ogredupealias.plugin.RecipientList;
 import fun.ogre.ogredupealias.utils.DisplayUtils;
 import fun.ogre.ogredupealias.utils.SoundPlayer;

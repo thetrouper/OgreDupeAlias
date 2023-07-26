@@ -1,28 +1,21 @@
 package fun.ogre.ogredupealias.plugin.funitems;
 
 import fun.ogre.ogredupealias.OgreDupeAlias;
-import fun.ogre.ogredupealias.events.EntityDamageListener;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.utils.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
+import fun.ogre.ogredupealias.utils.ItemUtils;
+import fun.ogre.ogredupealias.utils.RaycastUtils;
+import fun.ogre.ogredupealias.utils.SoundPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
-
-import java.util.Random;
-
-import static org.bukkit.event.block.Action.*;
 
 
 public class SnowChinegun {

@@ -8,11 +8,8 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.awt.*;
 
 public final class StoreGUI {
     public static final ItemStack knightItem = new ItemStack(ItemBuilder.create()

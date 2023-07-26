@@ -1,13 +1,10 @@
 package fun.ogre.ogredupealias.utils;
 
-import fun.ogre.ogredupealias.OgreDupeAlias;
 import fun.ogre.ogredupealias.data.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;

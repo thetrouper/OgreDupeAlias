@@ -1,7 +1,7 @@
 package fun.ogre.ogredupealias.commands.commands;
 
-import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.commands.CmdExHandler;
+import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.data.ConfigDataType;
 import fun.ogre.ogredupealias.utils.ArrayUtils;
 import fun.ogre.ogredupealias.utils.Text;

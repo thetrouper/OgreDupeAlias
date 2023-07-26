@@ -1,7 +1,9 @@
 package fun.ogre.ogredupealias.events;
 
-import fun.ogre.ogredupealias.plugin.funitems.*;
-import fun.ogre.ogredupealias.utils.*;
+import fun.ogre.ogredupealias.utils.PlayerUtils;
+import fun.ogre.ogredupealias.utils.RaycastUtils;
+import fun.ogre.ogredupealias.utils.SoundPlayer;
+import fun.ogre.ogredupealias.utils.Text;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
@@ -11,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;

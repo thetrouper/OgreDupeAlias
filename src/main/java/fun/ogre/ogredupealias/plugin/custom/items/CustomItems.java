@@ -1,6 +1,7 @@
 package fun.ogre.ogredupealias.plugin.custom.items;
 
 import fun.ogre.ogredupealias.plugin.custom.items.customitems.LazerItem;
+import fun.ogre.ogredupealias.plugin.custom.items.customitems.RailgunItem;
 import fun.ogre.ogredupealias.plugin.custom.items.customitems.TazerItem;
 import fun.ogre.ogredupealias.utils.ItemUtils;
 import org.bukkit.event.EventHandler;
@@ -19,6 +20,7 @@ public final class CustomItems implements Listener {
     public static void init() {
         register(new TazerItem());
         register(new LazerItem());
+        register(new RailgunItem());
     }
 
     public static ItemStack register(ItemStack item, CustomItemInteractionCallback interactionCallback) {
@@ -30,6 +32,10 @@ public final class CustomItems implements Listener {
         item.registerThis();
         namesList.put(item.getClass(), item.getName());
         return item.getItem();
+    }
+
+    public static Map<Class<? extends CustomItem>, String> getRegistries() {
+        return new HashMap<>(namesList);
     }
 
     public static void onInteract(ItemStack item, PlayerInteractEvent event) {

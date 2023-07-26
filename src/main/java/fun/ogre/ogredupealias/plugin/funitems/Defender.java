@@ -1,16 +1,16 @@
 package fun.ogre.ogredupealias.plugin.funitems;
+
 import fun.ogre.ogredupealias.OgreDupeAlias;
-import fun.ogre.ogredupealias.events.EntityDamageListener;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.utils.*;
+import fun.ogre.ogredupealias.utils.ItemUtils;
+import fun.ogre.ogredupealias.utils.RaycastUtils;
+import fun.ogre.ogredupealias.utils.SoundPlayer;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;

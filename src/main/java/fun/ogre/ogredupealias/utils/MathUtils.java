@@ -1,6 +1,8 @@
 package fun.ogre.ogredupealias.utils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public final class MathUtils {
 

@@ -2,7 +2,6 @@ package fun.ogre.ogredupealias.plugin.custom.forging;
 
 import fun.ogre.ogredupealias.plugin.ItemPresets;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package fun.ogre.ogredupealias.plugin.custom.forging;
 
-import fun.ogre.ogredupealias.utils.ServerUtils;
 import fun.ogre.ogredupealias.plugin.RecipientList;
+import fun.ogre.ogredupealias.utils.ServerUtils;
 import fun.ogre.ogredupealias.utils.Text;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

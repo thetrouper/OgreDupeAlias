@@ -168,6 +168,13 @@ public abstract class ItemPresets {
             .customModelData(1111)
             .build();
 
+    public static ItemStack RAILGUN = ItemBuilder.create()
+            .material(Material.DIAMOND_HORSE_ARMOR)
+            .name("Railgun")
+            .lore(Text.color("&7- Another funny gadget!"))
+            .customModelData(1111)
+            .build();
+
     public static ItemStack BLANK = ItemBuilder.create()
             .material(Material.LIGHT_GRAY_STAINED_GLASS_PANE)
             .name(" ")
