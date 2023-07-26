@@ -2,7 +2,6 @@ package fun.ogre.ogredupealias.events;
 
 import fun.ogre.ogredupealias.data.PlacedStructures;
 import fun.ogre.ogredupealias.plugin.InventoryPresets;
-import fun.ogre.ogredupealias.plugin.custom.gui.CustomGuis;
 import fun.ogre.ogredupealias.plugin.funitems.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -15,7 +14,6 @@ public class InteractionListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         try {
-            e.getPlayer().openInventory(CustomGuis.RANKS.getInventory());
 
             this.processTable(e);
             NetSkyBlade.handleNetskyBlade(e);

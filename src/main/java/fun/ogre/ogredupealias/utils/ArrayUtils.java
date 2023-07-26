@@ -1,11 +1,13 @@
 package fun.ogre.ogredupealias.utils;
 
+import com.google.common.collect.ObjectArrays;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 public final class ArrayUtils {
@@ -37,5 +39,10 @@ public final class ArrayUtils {
     public static class Constants {
         public static final List<String> MATERIAL_NAMES = toNewList(Arrays.stream(Material.values()).toList(),m -> m.name().toLowerCase());
         public static final List<String> ENTITY_NAMES = toNewList(Arrays.stream(EntityType.values()).toList(),e -> e.name().toLowerCase());
+    }
+
+    public static <T> String joinFrom(int begin, T[] items, Function<T,String> function ) {
+        List<String> list = Arrays.stream(items).filter(Objects::nonNull).map(function).toList();
+        return String.join(" ", list.subList(begin,list.size()-1));
     }
 }

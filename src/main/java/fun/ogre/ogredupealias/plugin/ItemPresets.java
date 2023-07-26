@@ -215,10 +215,14 @@ public abstract class ItemPresets {
 
     public static ItemStack RANK_CONFIRM_BUTTON = ItemBuilder.create()
             .material(Material.BARRIER)
-            .name(Text.color("&eSet Rank?"))
-            .lore(" ")
-            .lore(Text.color("&7Yes, select!"))
-            .lore(" ")
+            .name(Text.color("&eConfirm Rank?"))
+            .lore(Text.color("&7Left-Click to select rank"))
+            .lore(Text.color("&7Right-Click to cancel"))
             .build();
 
+    public static ItemStack CHANGE_TAG_BUTTON = ItemBuilder.create()
+            .material(Material.NAME_TAG)
+            .name(Text.color("&bChange Tag"))
+            .lore(Text.color("&7Click to change your custom tag"))
+            .build();
 }

@@ -8,6 +8,15 @@ description: Server utilities for OgreDupe.minehut.gg
 website: https://itzispyder.github.io/
 
 permissions:
+  oda.store:
+    description: Access to the store
+    default: op
+  oda.customtag.change:
+    description: Ability to change your custom tag
+    default: op
+  oda.changerank.use:
+    description: Ability to change your rank prefix
+    default: op
   oda.commands.config:
     description: Able to manage config from in game
     default: op
@@ -55,8 +64,14 @@ permissions:
   oda.chat.bypass.unicode:
     description: Bypass anti-unicode
     default: op
-
+  oda.showdonation:
+    description: Show a donation
+    default: op
 commands:
+  changerank:
+    usage: /changerank
+    description: Change your rank prefix or your custom tag
+    permission: oda.changerank.use
   givecustom:
     description: give custom items
     usage: /givecustom <customitem>
@@ -119,3 +134,14 @@ commands:
     permission: oda.commands.forcefield
     aliases:
       - /ff
+  showdonation:
+    description: test head command
+    usage: /testheadcommand
+    permission: oda.showdonation
+  ranks:
+    description: Store GUI
+    usage: /ranks
+    permission: oda.store
+    aliases:
+      - store
+      - buy

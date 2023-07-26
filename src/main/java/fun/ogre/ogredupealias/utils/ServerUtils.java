@@ -1,5 +1,6 @@
 package fun.ogre.ogredupealias.utils;
 
+import fun.ogre.ogredupealias.OgreDupeAlias;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -64,7 +65,9 @@ public class ServerUtils {
         return p.getLocation().clone().subtract(0, 1, 0).getBlock().getType() == type;
     }
 
-    public static boolean dispatch(String command) {
-        return Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+    public static void dispatch(String command) {
+        Bukkit.getScheduler().runTask(OgreDupeAlias.instance, () -> {
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+        });
     }
 }
