@@ -9,6 +9,7 @@ import org.bukkit.*;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Transformation;
 import org.joml.AxisAngle4f;
 import org.joml.Vector3f;
@@ -38,44 +39,78 @@ public class RailgunItem extends CustomItem {
             Particle.DustOptions dust = new Particle.DustOptions(Color.AQUA, 10F);
             world.spawnParticle(Particle.REDSTONE, end, 30, 0, 0, 0, 1, dust);
 
-            float dist = (float)loc.distance(end);
-            float rad = 0.02F;
-            AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
-            Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
-
-            BlockDisplay beam = world.spawn(eye, BlockDisplay.class, entity -> {
-                SoundPlayer sound = new SoundPlayer(loc, Sound.BLOCK_BEACON_POWER_SELECT, 5.0F, 10.0F);
-                Vector3f scale = new Vector3f(rad, rad, 0F);
-                Transformation transformation = new Transformation(translation, angle, scale, angle);
-
-                entity.setBrightness(new Display.Brightness(15, 15));
-                entity.setViewRange(dist);
-                entity.setRotation(eye.getYaw(), eye.getPitch());
-                entity.setBlock(Material.DIAMOND_BLOCK.createBlockData());
-                entity.setTransformation(transformation);
-                sound.playWithin(500);
-
-                Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
-            });
-
-            Bukkit.getScheduler().runTaskLater(instance, () -> {
-                Vector3f scale = new Vector3f(rad, rad, dist);
-                Transformation transformation = new Transformation(translation, angle, scale, angle);
-
-                beam.setInterpolationDelay(0);
-                beam.setInterpolationDuration((int)(dist / 2));
-                beam.setTransformation(transformation);
-            }, 5);
-
-            Bukkit.getScheduler().runTaskLater(instance, () -> {
-                Vector3f scale = new Vector3f(rad, rad, 0.0F);
-                Transformation transformation = new Transformation(translation, angle, scale, angle);
-
-                world.createExplosion(end, 3, false, false, player);
-                beam.setInterpolationDelay(0);
-                beam.setInterpolationDuration(20);
-                beam.setTransformation(transformation);
-            }, 40);
+            this.beam(loc, end, eye, world, player);
+            this.flash(loc, end, eye, world, player);
         };
+    }
+
+    private void flash(Location loc, Location end, Location eye, World world, Player player) {
+        float dist = (float)loc.distance(end);
+        float rad = 0.02F;
+        AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
+        Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
+
+        BlockDisplay beam = world.spawn(eye, BlockDisplay.class, entity -> {
+            Vector3f scale = new Vector3f(rad, 0.5F, dist);
+            Transformation transformation = new Transformation(translation, angle, scale, angle);
+
+            entity.setBrightness(new Display.Brightness(15, 15));
+            entity.setViewRange(dist);
+            entity.setRotation(eye.getYaw(), eye.getPitch());
+            entity.setBlock(Material.WHITE_STAINED_GLASS.createBlockData());
+            entity.setTransformation(transformation);
+
+            Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
+        });
+
+        Bukkit.getScheduler().runTaskLater(instance, () -> {
+            Vector3f scale = new Vector3f(rad, 0F, dist);
+            Transformation transformation = new Transformation(translation, angle, scale, angle);
+
+            beam.setInterpolationDelay(0);
+            beam.setInterpolationDuration(20);
+            beam.setTransformation(transformation);
+        }, 5);
+    }
+
+    private void beam(Location loc, Location end, Location eye, World world, Player player) {
+        float dist = (float)loc.distance(end);
+        float rad = 0.02F;
+        AxisAngle4f angle = new AxisAngle4f(0F, 0F, 0F, 1F);
+        Vector3f translation = new Vector3f(-0.05F, -0.2F, 0F);
+
+        BlockDisplay beam = world.spawn(eye, BlockDisplay.class, entity -> {
+            SoundPlayer sound = new SoundPlayer(loc, Sound.BLOCK_BEACON_POWER_SELECT, 5.0F, 10.0F);
+            Vector3f scale = new Vector3f(rad, rad, 0F);
+            Transformation transformation = new Transformation(translation, angle, scale, angle);
+
+            entity.setBrightness(new Display.Brightness(15, 15));
+            entity.setViewRange(dist);
+            entity.setRotation(eye.getYaw(), eye.getPitch());
+            entity.setBlock(Material.DIAMOND_BLOCK.createBlockData());
+            entity.setTransformation(transformation);
+            sound.playWithin(500);
+
+            Bukkit.getScheduler().runTaskLater(instance, entity::remove, 60);
+        });
+
+        Bukkit.getScheduler().runTaskLater(instance, () -> {
+            Vector3f scale = new Vector3f(rad, rad, dist);
+            Transformation transformation = new Transformation(translation, angle, scale, angle);
+
+            beam.setInterpolationDelay(0);
+            beam.setInterpolationDuration((int)(dist / 2));
+            beam.setTransformation(transformation);
+        }, 5);
+
+        Bukkit.getScheduler().runTaskLater(instance, () -> {
+            Vector3f scale = new Vector3f(rad, rad, 0.0F);
+            Transformation transformation = new Transformation(translation, angle, scale, angle);
+
+            world.createExplosion(end, 3, false, false, player);
+            beam.setInterpolationDelay(0);
+            beam.setInterpolationDuration(20);
+            beam.setTransformation(transformation);
+        }, 40);
     }
 }
