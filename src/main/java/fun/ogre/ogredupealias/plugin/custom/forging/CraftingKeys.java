@@ -13,6 +13,8 @@ public abstract class CraftingKeys {
 
     public static void initRecipes() {
         // my custom
+        register(ItemPresets.BLUE_LAZER_DIODE, "[beacon{}, beacon{}, beacon{}, beacon{}, beacon{}, beacon{}, beacon{}, beacon{}, beacon{}]");
+        register(ItemPresets.RAILGUN, "[light_blue_candle{CustomModelData:1111,display:{Lore:['{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"gray\",\"text\":\"- Use this to craft the \"},{\"italic\":false,\"color\":\"aqua\",\"text\":\"lazer guns\"}],\"text\":\"\"}'],Name:'{\"extra\":[{\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false,\"color\":\"aqua\",\"text\":\"Blue Lazer Diode\"}],\"text\":\"\"}'}}, diamond{}, iron_block{}, air{}, air{}, iron_block{}, air{}, air{}, air{}]");
         register(ItemPresets.SPBRifle, "[iron_horse_armor{}]");
         register(ItemPresets.POTATOCANNON, "[potato{}, potato{}, potato{}, potato{}, golden_hoe{}, potato{}, potato{}, potato{}, potato{}]");
         register(ItemPresets.LASER_POINTER, "[polished_blackstone_button{}, lime_concrete{}, lime_stained_glass{}, lime_concrete{}, diamond{}, lime_concrete{}, stick{}, lime_concrete{}, air{}]");

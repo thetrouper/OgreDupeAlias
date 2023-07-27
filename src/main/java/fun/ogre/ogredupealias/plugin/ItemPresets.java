@@ -170,8 +170,15 @@ public abstract class ItemPresets {
 
     public static ItemStack RAILGUN = ItemBuilder.create()
             .material(Material.DIAMOND_HORSE_ARMOR)
-            .name("Railgun")
+            .name(Text.color("&bRailgun &3>>>"))
             .lore(Text.color("&7- Another funny gadget!"))
+            .customModelData(1111)
+            .build();
+
+    public static ItemStack BLUE_LAZER_DIODE = ItemBuilder.create()
+            .material(Material.LIGHT_BLUE_CANDLE)
+            .name(Text.color("&bBlue Lazer Diode"))
+            .lore(Text.color("&7- Use this to craft the &blazer guns"))
             .customModelData(1111)
             .build();
 
