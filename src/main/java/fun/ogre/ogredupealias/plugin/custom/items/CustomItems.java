@@ -1,5 +1,6 @@
 package fun.ogre.ogredupealias.plugin.custom.items;
 
+import fun.ogre.ogredupealias.plugin.custom.items.customitems.LazerGunItem;
 import fun.ogre.ogredupealias.plugin.custom.items.customitems.LazerItem;
 import fun.ogre.ogredupealias.plugin.custom.items.customitems.RailgunItem;
 import fun.ogre.ogredupealias.plugin.custom.items.customitems.TazerItem;
@@ -21,6 +22,7 @@ public final class CustomItems implements Listener {
         register(new TazerItem());
         register(new LazerItem());
         register(new RailgunItem());
+        register(new LazerGunItem());
     }
 
     public static ItemStack register(ItemStack item, CustomItemInteractionCallback interactionCallback) {

@@ -182,6 +182,12 @@ public abstract class ItemPresets {
             .customModelData(1111)
             .build();
 
+    public static ItemStack LAZER_GUN = ItemBuilder.create()
+            .material(Material.IRON_HORSE_ARMOR)
+            .name(Text.ofAll("&aGreen &7Lazer Blaster"))
+            .lore(Text.ofAll("&8click to shoot"))
+            .build();
+
     public static ItemStack BLANK = ItemBuilder.create()
             .material(Material.LIGHT_GRAY_STAINED_GLASS_PANE)
             .name(" ")
