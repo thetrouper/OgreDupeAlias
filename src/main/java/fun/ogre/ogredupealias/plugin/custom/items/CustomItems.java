@@ -19,10 +19,10 @@ public final class CustomItems implements Listener {
     private static final Map<Class<? extends CustomItem>, String> namesList = new HashMap<>();
 
     public static void init() {
-        register(new TazerItem());
-        register(new LazerItem());
-        register(new RailgunItem());
-        register(new LazerGunItem());
+        //register(new TazerItem());
+        //register(new LazerItem());
+        //register(new RailgunItem());
+        //register(new LazerGunItem());
     }
 
     public static ItemStack register(ItemStack item, CustomItemInteractionCallback interactionCallback) {
