@@ -55,6 +55,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         pm.registerEvents(new SPBEventListener(), this);
         // event for custom items
         pm.registerEvents(new CustomItems(), this);
+        LiteBansEvents.registerEvents();
 
         // Commands
         getCommand("forcefield").setExecutor(new ForceFieldCommand());
