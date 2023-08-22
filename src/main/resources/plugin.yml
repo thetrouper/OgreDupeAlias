@@ -3,11 +3,15 @@ version: '${version}'
 main: fun.ogre.ogredupealias.OgreDupeAlias
 api-version: 1.19
 prefix: ODA
+depend: [ LiteBans ]
 authors: [ ImproperIssues, TheTrouper ]
 description: Server utilities for OgreDupe.minehut.gg
-website: https://itzispyder.github.io/
+website: https://itzispyder.github.io/q
 
 permissions:
+  oda.dupe:
+    description: Access to the dupe command
+    default: op
   oda.store:
     description: Access to the store
     default: op
@@ -68,6 +72,10 @@ permissions:
     description: Show a donation
     default: op
 commands:
+  ogredupe:
+    usage: /ogredupe [<int>] [<stack>] [<exponential>]
+    description: Dupelictate the item in your hand
+    permission: oda.dupe
   changerank:
     usage: /changerank
     description: Change your rank prefix or your custom tag
