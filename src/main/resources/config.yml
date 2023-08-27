@@ -1,6 +1,9 @@
 plugin:
   prefix: "&7[&5Ogre&3Dupe&7] &r"
-
+  ban-webhook:
+  mute-webhook:
+  unmute-webhook:
+  unban-webhook:
 chat:
   anti-swear:
     enabled: true

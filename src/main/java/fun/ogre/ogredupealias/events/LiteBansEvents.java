@@ -1,5 +1,6 @@
 package fun.ogre.ogredupealias.events;
 import fun.ogre.ogredupealias.OgreDupeAlias;
+import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.data.Emojis;
 import  fun.ogre.ogredupealias.utils.Webhook;
 import litebans.api.Entry;
@@ -40,14 +41,14 @@ public class LiteBansEvents extends Events.Listener {
                     if (entry.getUuid() == null) return;
                     UUID target = UUID.fromString(entry.getUuid());
                     UUID executor = UUID.fromString(entry.getExecutorUUID());
-                    sendUnbanLog(target,executor,entry.getReason());
+                    sendUnbanLog(target,executor,entry.getRemovalReason());
                 }
                 if (entry.getType().equals("mute")) {
                     if (entry.getExecutorUUID() == null) return;
                     if (entry.getUuid() == null) return;
                     UUID target = UUID.fromString(entry.getUuid());
                     UUID executor = UUID.fromString(entry.getExecutorUUID());
-                    sendUnmuteLog(target,executor,entry.getReason());
+                    sendUnmuteLog(target,executor,entry.getRemovalReason());
                 }
             }
         });
@@ -55,7 +56,7 @@ public class LiteBansEvents extends Events.Listener {
     public static void sendBanLog(UUID target, UUID executerUUID, String reason, String duration) {
         String name = Bukkit.getOfflinePlayer(target).getName();
         String executor = Bukkit.getOfflinePlayer(executerUUID).getName();
-        Webhook webhook = new Webhook("https://discord.com/api/webhooks/1110731451982422136/U33AFoT3nVpVo2iTO2kVRuHV4F4PdOtJDp8xsTavkmctU0fDKmW0ckxfGtpKKjobH-Cb");
+        Webhook webhook = new Webhook(Config.Plugin.Webhooks.banWebhook);
         webhook.setAvatarUrl("https://r2.e-z.host/d440b58a-ba90-4839-8df6-8bba298cf817/3lwit5nt.png");
         webhook.setUsername("Staff Logs");
         Webhook.EmbedObject embed = new Webhook.EmbedObject()
@@ -81,7 +82,7 @@ public class LiteBansEvents extends Events.Listener {
     public static void sendMuteLog(UUID target, UUID executerUUID, String reason, String duration) {
         String name = Bukkit.getOfflinePlayer(target).getName();
         String executor = Bukkit.getOfflinePlayer(executerUUID).getName();
-        Webhook webhook = new Webhook("https://discord.com/api/webhooks/1110731451982422136/U33AFoT3nVpVo2iTO2kVRuHV4F4PdOtJDp8xsTavkmctU0fDKmW0ckxfGtpKKjobH-Cb");
+        Webhook webhook = new Webhook(Config.Plugin.Webhooks.muteWebhook);
         webhook.setAvatarUrl("https://r2.e-z.host/d440b58a-ba90-4839-8df6-8bba298cf817/3lwit5nt.png");
         webhook.setUsername("Staff Logs");
         Webhook.EmbedObject embed = new Webhook.EmbedObject()
@@ -106,7 +107,7 @@ public class LiteBansEvents extends Events.Listener {
     public static void sendUnbanLog(UUID target, UUID executerUUID, String reason) {
         String name = Bukkit.getOfflinePlayer(target).getName();
         String executor = Bukkit.getOfflinePlayer(executerUUID).getName();
-        Webhook webhook = new Webhook("https://discord.com/api/webhooks/1110731451982422136/U33AFoT3nVpVo2iTO2kVRuHV4F4PdOtJDp8xsTavkmctU0fDKmW0ckxfGtpKKjobH-Cb");
+        Webhook webhook = new Webhook(Config.Plugin.Webhooks.unbanWebhook);
         webhook.setAvatarUrl("https://r2.e-z.host/d440b58a-ba90-4839-8df6-8bba298cf817/3lwit5nt.png");
         webhook.setUsername("Staff Logs");
         Webhook.EmbedObject embed = new Webhook.EmbedObject()
@@ -130,7 +131,7 @@ public class LiteBansEvents extends Events.Listener {
     public static void sendUnmuteLog(UUID target, UUID executerUUID, String reason) {
         String name = Bukkit.getOfflinePlayer(target).getName();
         String executor = Bukkit.getOfflinePlayer(executerUUID).getName();
-        Webhook webhook = new Webhook("https://discord.com/api/webhooks/1110731451982422136/U33AFoT3nVpVo2iTO2kVRuHV4F4PdOtJDp8xsTavkmctU0fDKmW0ckxfGtpKKjobH-Cb");
+        Webhook webhook = new Webhook(Config.Plugin.Webhooks.unMuteWebhook);
         webhook.setAvatarUrl("https://r2.e-z.host/d440b58a-ba90-4839-8df6-8bba298cf817/3lwit5nt.png");
         webhook.setUsername("Staff Logs");
         Webhook.EmbedObject embed = new Webhook.EmbedObject()

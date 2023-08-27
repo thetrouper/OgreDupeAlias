@@ -46,6 +46,14 @@ public abstract class Config {
         public static String prefix() {
             return Text.color(get().getString(path + "prefix", "&7[&5Ogre&3Dupe&7] &r"));
         }
+        public static class Webhooks {
+
+            public static String banWebhook = path + "ban-webhook";
+            public static String muteWebhook = path + "mute-webhook";
+            public static String unbanWebhook = path + "unban-webhook";
+            public static String unMuteWebhook = path + "unmute-webhook";
+        }
+
     }
 
     public static class Chat {
@@ -73,7 +81,6 @@ public abstract class Config {
                 return dictionary;
             }
         }
-
         public static class AntiSpam {
             private static final String path = Chat.path + "anti-spam.";
             public static boolean enabled() {
