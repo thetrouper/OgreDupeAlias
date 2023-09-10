@@ -56,6 +56,9 @@ permissions:
       - oda.chat.bypass.spam
       - oda.chat.bypass.repeat
       - oda.chat.bypass.unicode
+  oda.commands.timer:
+    description: Timer to place blocks
+    default: op
   oda.chat.bypass.swear:
     description: Bypass anti-swear
     default: op
@@ -157,3 +160,7 @@ commands:
     aliases:
       - store
       - buy
+  timer:
+    description: Block placement timer
+    usage: /timer [set|stop] <timer> <players tag> <seconds> <~x> <~y> <~z> <block>
+    permission: oda.commands.timer

@@ -1,9 +1,5 @@
 package fun.ogre.ogredupealias.plugin.custom.items;
 
-import fun.ogre.ogredupealias.plugin.custom.items.customitems.LazerGunItem;
-import fun.ogre.ogredupealias.plugin.custom.items.customitems.LazerItem;
-import fun.ogre.ogredupealias.plugin.custom.items.customitems.RailgunItem;
-import fun.ogre.ogredupealias.plugin.custom.items.customitems.TazerItem;
 import fun.ogre.ogredupealias.utils.ItemUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

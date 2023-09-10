@@ -8,11 +8,14 @@ import fun.ogre.ogredupealias.plugin.custom.items.CustomItems;
 import fun.ogre.ogredupealias.plugin.funitems.AdminUtility;
 import fun.ogre.ogredupealias.plugin.funitems.Pickler;
 import fun.ogre.ogredupealias.plugin.funitems.PotatoCannon;
+import fun.ogre.ogredupealias.utils.ServerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.util.ConcurrentModificationException;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public final class OgreDupeAlias extends JavaPlugin {
@@ -30,6 +33,7 @@ public final class OgreDupeAlias extends JavaPlugin {
         this.initConfig();
         CustomItems.init();
         CraftingKeys.initRecipes();
+        this.initTimer();
     }
 
     @Override
@@ -83,11 +87,29 @@ public final class OgreDupeAlias extends JavaPlugin {
         getCommand("showdonation").setTabCompleter(new ShowDonationCommand());
         getCommand("ranks").setExecutor(new RanksCommand());
         getCommand("ranks").setTabCompleter(new RanksCommand());
+        getCommand("timer").setExecutor(new TimerCommand());
+        getCommand("timer").setTabCompleter(new TimerCommand());
     }
 
     public void initConfig() {
         this.getConfig().options().copyDefaults();
         this.saveDefaultConfig();
+    }
+
+    public void initTimer() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            try {
+                if (TimerCommand.timers.isEmpty()) {
+                    return;
+                }
+                for (Map.Entry<String, TimerCommand.TimerEntry> entry : TimerCommand.timers.entrySet()) {
+                    TimerCommand.TimerEntry timer = entry.getValue();
+                    String msg = "%s: %s".formatted(timer.name(), timer.getTimeLeft());
+                    ServerUtils.forEachPlayerRun(player -> player.getScoreboardTags().contains(timer.tag()), player -> ServerUtils.sendActionBar(player, msg));
+                }
+            }
+            catch (ConcurrentModificationException ignore) {}
+        }, 0, 20);
     }
 
     public static String prefix() {

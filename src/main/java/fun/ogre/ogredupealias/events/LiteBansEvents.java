@@ -1,14 +1,12 @@
 package fun.ogre.ogredupealias.events;
+
 import fun.ogre.ogredupealias.OgreDupeAlias;
 import fun.ogre.ogredupealias.data.Config;
 import fun.ogre.ogredupealias.data.Emojis;
-import  fun.ogre.ogredupealias.utils.Webhook;
+import fun.ogre.ogredupealias.utils.Webhook;
 import litebans.api.Entry;
 import litebans.api.Events;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 import java.awt.*;
 import java.io.IOException;

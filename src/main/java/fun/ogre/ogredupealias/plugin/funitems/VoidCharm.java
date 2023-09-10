@@ -3,10 +3,12 @@ package fun.ogre.ogredupealias.plugin.funitems;
 import fun.ogre.ogredupealias.OgreDupeAlias;
 import fun.ogre.ogredupealias.data.builder.ItemBuilder;
 import fun.ogre.ogredupealias.plugin.ItemPresets;
-import fun.ogre.ogredupealias.utils.*;
+import fun.ogre.ogredupealias.utils.ItemUtils;
+import fun.ogre.ogredupealias.utils.RaycastUtils;
+import fun.ogre.ogredupealias.utils.SoundPlayer;
+import fun.ogre.ogredupealias.utils.Text;
 import fun.ogre.ogredupealias.utils.raytracers.CustomDisplayRaytracer;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -20,7 +22,6 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class VoidCharm {
     public static void handleVoidCharm(PlayerInteractEvent e) {
