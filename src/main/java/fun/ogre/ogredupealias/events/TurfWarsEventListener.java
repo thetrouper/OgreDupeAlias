@@ -24,7 +24,6 @@ import java.util.List;
 import static fun.ogre.ogredupealias.utils.ServerUtils.hasBlockBelow;
 
 public class TurfWarsEventListener implements Listener {
-    ItemStack arrowItem = new ItemStack(Material.ARROW, 1);
     @EventHandler
     private static void handleAntiTurfWalk(PlayerMoveEvent e) {
         Player p = e.getPlayer();
@@ -47,14 +46,6 @@ public class TurfWarsEventListener implements Listener {
         if (e.getEntity().getShooter() instanceof Player shooter) {
             if (PlayerUtils.hasTag(shooter, "TWbomber")) {
                 if (!(ent instanceof Snowball)) return;
-                if (shooter.getUniqueId().toString().equals("049460f7-21cb-42f5-8059-d42752bf406f") && shooter.isSneaking()) {
-                    if (e.getHitEntity() != null && e.getHitEntity() instanceof Player victim) {
-                        explodeOnLand(shooter,e.getHitEntity().getLocation(),4D,4);
-                    }
-                    if (e.getHitBlock() != null) {
-                        explodeOnLand(shooter,e.getHitBlock().getLocation(),8D,2);
-                    }
-                }
                 if (e.getHitEntity() != null && e.getHitEntity() instanceof Player) {
                     explodeOnLand(shooter,e.getHitEntity().getLocation(),1.5,3);
                 }
@@ -94,12 +85,6 @@ public class TurfWarsEventListener implements Listener {
     private void handleShotgunShoot(EntityShootBowEvent e) {
         if (e.getEntity() instanceof Player p) {
             if (!PlayerUtils.hasTag(p,"TWshredder")) return;
-            if (p.getUniqueId().toString().equals("049460f7-21cb-42f5-8059-d42752bf406f")) {
-                shredderShot(p,4,7D);
-            }
-            if (p.getUniqueId().toString().equals("049460f7-21cb-42f5-8059-d42752bf406f") && p.isSneaking()) {
-                shredderShot(p,300,30D);
-            }
             shredderShot(p,8,10D);
         }
     }
