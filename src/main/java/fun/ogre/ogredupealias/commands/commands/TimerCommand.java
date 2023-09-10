@@ -12,6 +12,7 @@ import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -53,13 +54,12 @@ public class TimerCommand implements TabExecutor {
                     }
 
                     Material type = Material.valueOf(args[7].toUpperCase());
-                    timers.put(timer, new TimerEntry(timer, tag, System.currentTimeMillis() + ticks * 50L, () -> {
-                        parser.getBlock(world).setType(type);
-                        timers.remove(timer);
-                    }));
+                    timers.put(timer, new TimerEntry(timer, tag, System.currentTimeMillis() + ticks * 50L, () -> parser.getBlock(world).setType(type)));
                     Bukkit.getScheduler().runTaskLater(OgreDupeAlias.instance, () -> {
                         if (timers.containsKey(timer)) {
-                            timers.get(timer).endAction().run();
+                            TimerEntry entry = timers.get(timer);
+                            timers.remove(timer);
+                            entry.endAction().run();
                         }
                     }, ticks);
 
@@ -87,6 +87,17 @@ public class TimerCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> l = new ArrayList<>();
+        World world;
+
+        if (sender instanceof Player source) {
+            world = source.getWorld();
+        }
+        else if (sender instanceof BlockCommandSender source) {
+            world = source.getBlock().getWorld();
+        }
+        else {
+            return l;
+        }
 
         switch (args.length) {
             case 1 -> l.addAll(List.of("stop", "set"));
@@ -102,7 +113,12 @@ public class TimerCommand implements TabExecutor {
             }
             case 3 -> {
                 switch (args[0]) {
-                    case "set" -> l.add(args[1]);
+                    case "set" -> {
+                        world.getEntities().stream().filter(e -> e instanceof Player).map(Entity::getScoreboardTags).forEach(l::addAll);
+                        if (l.isEmpty()) {
+                            l.add(args[1]);
+                        }
+                    }
                 }
             }
             case 4 -> {
